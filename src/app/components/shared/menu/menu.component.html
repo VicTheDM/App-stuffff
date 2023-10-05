@@ -1,1 +1,229 @@
-<p>menu works!</p>
+<p-sidebar [(visible)]="visibleSidebar" [baseZIndex]="10000">
+    <ng-template pTemplate="header">
+        <h1 style="font-weight:normal">Menu</h1>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div>
+            <!-- *ngIf="!showPreferences" -->
+            <ul class="nav flex-column text-dark">
+                <li class="nav-item" *ngIf="SECTIONS.perfil">
+                    <a class="nav-link" routerLink="/perfil">
+                        <i-feather name="user"></i-feather>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="SECTIONS.correo">
+                    <a class="nav-link" routerLink="/correo">
+                        <i-feather name="mail"></i-feather>
+                        <span>Correo</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item" *ngIf="SECTIONS.participantes">
+                  <a class="nav-link" routerLink="/participantes">
+                      <i-feather name="user"></i-feather>
+                      <span>Participantes</span>
+                  </a>
+              </li>
+              <li class="nav-item" *ngIf="SECTIONS.participantes">
+                <a class="nav-link" routerLink="/checador">
+                    <i-feather name="user"></i-feather>
+                    <span>Checador</span>
+                </a>
+            </li>
+                <li>
+                    <a class="h6 mt-3" role="button" class="collapse_title" [attr.aria-expanded]="!isCollapsed"
+                        aria-controls="collapse_1" *ngIf="SECTIONS.reportes" (click)="collapse.toggle()">
+                        <i-feather name="chevron-right" *ngIf="isCollapsed"></i-feather>
+                        <i-feather name="chevron-down" *ngIf="!isCollapsed"></i-feather>
+                        Reportes
+                    </a>
+                </li>
+            </ul>
+            <div >
+                <ul class="nav flex-column text-dark" *ngIf="SECTIONS.reportes">
+                    <li class="nav-item" *ngIf="SECTIONS.reportesGeneral">
+                        <a class="nav-link" aria-current="page" routerLink="/reporte-general">
+                            <i-feather name="file-text"></i-feather>
+                            <span>Reporte general</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="SECTIONS.reportesUsuario">
+                        <a class="nav-link">
+                            <i-feather name="file-plus" routerLink="/reporte-usuarios"></i-feather>
+                            <span>Reportes de usuarios</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="SECTIONS.reportesDocumentos">
+                        <a class="nav-link">
+                            <i-feather name="file-minus" routerLink="/reporte-documentos"></i-feather>
+                            <span>Reportes documentos</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div >
+                <ul class="nav flex-column text-dark" *ngIf="SECTIONS.parametros">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/parametros">
+                            <i-feather name="settings"></i-feather>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ng-template>
+    <!-- <ng-template pTemplate="footer">
+        <div class="offcanvas-footer border-top p-3">
+            <div class="d-flex justify-content-between ">
+                <div class="left">
+                    <div class="d-flex justify-content-between align-items-center btn-custom">
+                        <img [src]="avatar()" alt="Avatar user" width="36" loading="lazy" id="avatar"
+                            class="bg-secondary rounded-circle p-1 rounded-pill border"
+                            [ngClass]="{'p-1': avatar() === 'https://img.icons8.com/windows/56/ffffff/user.png'}">
+                        <div class="offcanvas-title text-left w-100 ps-3" id="offcanvas_label">
+                            <p class="m-0" id="user_name_alias">
+                                {{ this.nombre ? this.nombre.split('null')[0] : this.nombre }}
+                            </p>
+                            <p class="m-0" placement="top" ngbTooltip="Perfil asignado">{{ this.rol ?? ''}}</p>
+                            <small class="text-muted" id="date" placement="top" ngbTooltip="Inicio de la ultima sesión">
+                                {{ this.fecha }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn" routerLink="/login">
+                    <i-feather name="log-out" placement="top" ngbTooltip="Cerrar sesión"></i-feather>
+                </button>
+            </div>
+        </div>
+    </ng-template> -->
+    <div class="offcanvas-body position-relative">
+
+        <!-- <div class="show-animation">
+          <div class="d-flex justify-content-between align-item-center header-sticky p-0">
+            <h4 class="m-0">Mis preferencias</h4>
+            <button class="btn btn-primary d-block ms-auto"
+            >
+            <!-- (click)="savePreferences($event)" 
+              Guardar
+            </button>
+          </div>
+          <hr>
+          <h5>Interface</h5>
+          <!-- <div class="mb-3 row">
+            <label for="preferences_user-userTheme" class="col-sm-6 col-form-label">Tema</label>
+            <div class="col-sm-6">
+              <select class="form-select _user_preferences" aria-label="Default select example"
+                id="preferences_user-userTheme"
+                (change)="changeTheme($event)">
+                <option value="light">Claro</option>
+                <option value="neon">Neón</option>
+                <option value="dark">Oscuro</option>
+                <option value="system">Sincronizar con el sistema operativo</option>
+              </select>
+            </div>
+          </div> 
+          <div class="mb-3 row">
+            <label for="preferences_user-userModeMenu" class="col-sm-6 col-form-label">Menú</label>
+            <div class="col-sm-6">
+              <select class="form-select _user_preferences" aria-label="Default select example"
+                id="preferences_user-userModeMenu"
+                >
+                <!-- (change)="changeShowMenu($event)" 
+                <option value="menu_compact">Compacto</option>
+                <option value="menu_hide_button">Ocultar - Botón menú</option>
+                <option value="menu_hide_mouse">Ocultar - Pasar con el mouse</option>
+                <option value="menu_always">Siempre visible</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="preferences_user-userFullScreen" class="col-sm-6 col-form-label">
+              Pantalla completa
+            </label>
+            <div class="col-sm-6">
+              <div class="form-check form-switch py-2 d-flex flex-row-reverse">
+                <input class="form-check-input _user_preferences" type="checkbox" role="switch"
+                  id="preferences_user-userFullScreen"
+                  >
+                  <!-- (change)="changePreferenceFullScreen($event)"
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="preferences_user-userAnimations" class="col-sm-6 col-form-label">
+              Animaciones
+            </label>
+            <div class="col-sm-6">
+              <div class="form-check form-switch py-2 d-flex flex-row-reverse">
+                <input class="form-check-input _user_preferences" type="checkbox" role="switch"
+                  id="preferences_user-userAnimations"
+                  >
+                  <!-- (change)="changePreferenceAnimation($event)" 
+              </div>
+            </div>
+          </div>
+          <hr>
+          <h5>Perfil</h5>
+          <div class="mb-3 row">
+            <label for="preferences_user-userAlias" class="col-sm-6 col-form-label">Alias</label>
+            <div class="col-sm-6">
+              <input type="text" autocomplete="off" class="form-control _user_preferences"
+                value="Maestro" id="preferences_user-userAlias"
+                >
+                <!-- (keyup)="changeNameUser($event)"
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="preferences_user-foto" class="col-sm-6 col-form-label">Foto</label>
+            <div class="col-sm-6">
+              <!-- <img alt="Avatar del usuario" [src]="croppedImageUser" width="36" id="img_avatar"
+                class="bg-secondary rounded-circle p-1 d-block mx-auto mb-3" #img_avatar
+                onerror="this.src='https://img.icons8.com/windows/56/ffffff/user.png'"
+                > 
+              <label class="w-100">
+                <input class="d-none" type="file" #btn_upload_logo id="btn_upload_logo"
+                  />
+                  <!-- (change)="fileChangeEvent($event)"
+                <span class="btn btn-dark mx-auto d-block">Subir foto</span>
+              </label>
+              <input type="hidden" class="_user_preferences" id="preferences_user-userAvatar">
+            </div>
+          </div>
+          <hr>
+          <h5>911</h5>
+          <div class="mb-3 row">
+            <label for="preferences_user-userSearchLocation" class="col-sm-6 col-form-label">
+              Buscar en
+            </label>
+            <div class="col-sm-6">
+              <input type="text" autocomplete="off" class="form-control _user_preferences"
+                value="Chihuahua, Chih." id="preferences_user-userSearchLocation">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="preferences_user-extension" class="col-sm-6 col-form-label">Extensión</label>
+            <div class="col-sm-6">
+              <input type="text" autocomplete="off" class="form-control _user_preferences"
+                value="Chihuahua, Chih." id="preferences_user-extension">
+            </div>
+          </div>
+        </div> -->
+    </div>
+
+    <!-- <p-button type="button" (click)="visibleSidebar = false" label="Save" styleClass="p-button-success"></p-button>
+    <p-button type="button" (click)="visibleSidebar = false" label="Cancel" styleClass="p-button-secondary"></p-button> -->
+</p-sidebar>
+
+<div class="position-fixed menu_btn w-auto d-flex flex-column d-print-none">
+    <div class="dcc container_menu">
+        <button class="btn btn-light rounded-circle btn-menu" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" #btn_menu
+            (document:keyup.alt.m)="btn_menu.click()" id="Menu" (click)="visibleSidebar = true">
+            <i-feather name="menu"></i-feather>
+            <!-- <i-feather name="menu" [ngbTooltip]="short_cut"></i-feather> -->
+        </button>
+    </div>
+</div>

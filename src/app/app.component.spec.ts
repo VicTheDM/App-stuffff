@@ -1,8 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      FormsModule,
+      HttpClientTestingModule,
+      TableModule,
+      DialogModule
+  ],
     declarations: [AppComponent]
   }));
 

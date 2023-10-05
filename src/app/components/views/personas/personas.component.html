@@ -1,1 +1,75 @@
-<p>personas works!</p>
+<p-table #dt [value]="personas" [rows]="10" [paginator]="true" [globalFilterFields]="['nombre','dependencia', 'evento','status']"
+    [(selection)]="selectedPersonas" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    <ng-template pTemplate="caption">
+        <div class="flex ">
+            <h5 class="m-0">Participantes</h5>
+            <div class="right" style="position: absolute; right: 0;">
+            <button pButton pRipple *ngIf="selectedPersonas.length" [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedPersonas()" [disabled]="!selectedPersonas || !selectedPersonas.length"></button>
+            <button pButton pRipple *ngIf="selectedPersonas.length" label="Exportar" icon="pi pi-upload" class="p-button-help"></button>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value!, 'contains')" placeholder="Buscar..." />
+            </span>
+            <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="goTo(0)"></button>
+        </div></div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+            <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+            <th pSortableColumn="correo">Correo <p-sortIcon field="correo"></p-sortIcon></th>
+            <th pSortableColumn="dependencia">Dependencia <p-sortIcon field="dependencia"></p-sortIcon></th>
+            <th pSortableColumn="evento">Evento <p-sortIcon field="evento"></p-sortIcon></th>
+            <th pSortableColumn="asistencias">Asistencias <p-sortIcon field="asistenciasn"></p-sortIcon></th>
+            <th pSortableColumn="asistencias">Fechas <p-sortIcon field="asistencias"></p-sortIcon></th>
+            <th pSortableColumn="status">Estatus <p-sortIcon field="status"></p-sortIcon></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-persona>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="persona"></p-tableCheckbox>
+            </td>
+            <td>{{persona.id}}</td>
+            <td>{{persona.nombre}}</td>
+            <td>{{persona.correo}}</td>
+            <td>{{persona.dependencia}}</td>
+            <td>{{getEvento(persona.eventoId)}}</td>
+            <td>{{persona.asistencias}} / {{persona.asistencias_requeridas}}  </td>
+            <td >
+                <div >
+                    <div>
+                        {{(persona.fechas[0] | date)??''}}
+                    </div>
+                    <div>
+                        {{(persona.fechas[1] | date)??''}}
+                    </div>
+                    <div>
+                        {{(persona.fechas[2] | date)??''}}
+                    </div>
+                    <div *ngIf="persona.fechas.length>3" >...</div>
+                </div>
+            </td>
+                
+            <td  class="position-relative w-0 p-0">
+                <span *ngIf="persona.status === 0" class="badge bg-danger">INACTIVO</span>
+                <span *ngIf="persona.asistencias < persona.asistencias_requeridas" class="badge bg-success">Incompleto</span>
+                <span *ngIf="persona.asistencias == persona.asistencias_requeridas" class="badge bg-success">Completo</span>
+                <span *ngIf="persona.status === 3" class="badge bg-success">Falta</span>
+                <ng-template> 
+                    
+                </ng-template><div class="position-absolute actions">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"  routerLink='/participantes-form/{{persona.id}}'></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"  (click)="deletePersona(persona)"></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

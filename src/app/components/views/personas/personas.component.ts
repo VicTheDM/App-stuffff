@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Persona } from '../../../domain/personas';
-// import { PersonasService } from '../../../services/personas.service';
+import { PersonasService } from '../../../services/personas.service';
 
 @Component({
     selector: 'app-participantes',
     templateUrl: './personas.component.html',
     styleUrls: ['./personas.component.css'],
-    providers: [ConfirmationService,MessageService]
+    providers: [ConfirmationService,MessageService, PersonasService]
 })
-// ,PersonasService
 export class PersonasComponent implements OnInit {
 
     personaDialog: boolean;
@@ -22,7 +21,7 @@ export class PersonasComponent implements OnInit {
     statuses: any[];
 
     constructor(
-        // private personaService: PersonasService, 
+        private personaService: PersonasService, 
         private messageService: MessageService, 
         private confirmationService: ConfirmationService
         ) 
@@ -37,18 +36,20 @@ export class PersonasComponent implements OnInit {
             return this.asistencias.find(val => val.id == id).nombre
         }
     async ngOnInit() {
-        // await this.personaService.getAll(0).subscribe(data => {
-        //     this.personas = data
-        //     console.log("personas: ",data)
+        await this.personaService.test().subscribe(res=>
+            console.log(res))
+        await this.personaService.getAll(0).subscribe(data => {
+            this.personas = data
+            console.log("personas: ",data)
         
-        // this.personaService.getAll(1).subscribe(data => {
-        //     this.asistencias = data
-        //     console.log("Asistencias: ",data)
-        // this.personaService.getAll(2).subscribe(data => {
-        //     this.eventos = data
-        //     console.log("Eventos: ",data)
-        //     this.fillTotal();
-        // });});});
+        this.personaService.getAll(1).subscribe(data => {
+            this.asistencias = data
+            console.log("Asistencias: ",data)
+        this.personaService.getAll(2).subscribe(data => {
+            this.eventos = data
+            console.log("Eventos: ",data)
+            this.fillTotal();
+        });});});
     }
 
     async fillTotal(){

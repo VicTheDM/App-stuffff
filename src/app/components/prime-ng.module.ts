@@ -9,16 +9,21 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from "primeng/api";
 import { MessageService } from "primeng/api";
 import { SidebarModule } from 'primeng/sidebar';
-
 import { FeatherModule } from 'angular-feather';
 import { allIcons } from 'angular-feather/icons';
+import { ToastModule } from "primeng/toast";
+import { QRCodeModule } from 'angularx-qrcode';
+import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
+LOAD_WASM().subscribe((res: any) => console.log('LOAD_WASM', res));
 @NgModule({
   imports: [
     FeatherModule.pick(allIcons),
-    
   ],
   exports: [
+    ToastModule,
     TableModule,
+    QRCodeModule,
+    NgxScannerQrcodeModule,
     SidebarModule,
     ConfirmDialogModule,
     BrowserModule,

@@ -36,18 +36,12 @@ export class PersonasComponent implements OnInit {
             return this.asistencias.find(val => val.id == id).nombre
         }
     async ngOnInit() {
-        await this.personaService.test().subscribe(res=>
-            console.log(res))
         await this.personaService.getAll(0).subscribe(data => {
             this.personas = data
-            console.log("personas: ",data)
-        
         this.personaService.getAll(1).subscribe(data => {
             this.asistencias = data
-            console.log("Asistencias: ",data)
         this.personaService.getAll(2).subscribe(data => {
             this.eventos = data
-            console.log("Eventos: ",data)
             this.fillTotal();
         });});});
     }
@@ -59,21 +53,19 @@ export class PersonasComponent implements OnInit {
             let asis = 0
             let fechasPart:any[] = []
             this.asistencias.forEach(element2 => {
-                if(element2.participanteId == element.id){
-                    console.log(element2.participanteId+'  '+ element.id)
+                if(element2.participanteId == element._id){
                     asis = asis+1
                     fechasPart.push(element2.fecha)
                 }
             });
-            element.evento = this.eventos.find(val => val.id == element.eventoId).nombre
+            element.evento = this.eventos.find(val => val._id == element.eventoId).nombre
             element.asistencias = asis
-            element.asistencias_requeridas = this.eventos.find(val => val.id == element.eventoId).asistencias_requeridas
+            element.asistencias_requeridas = this.eventos.find(val => val._id == element.eventoId).asistencias_requeridas
             element.fechas = fechasPart
-            console.log(element.nombre, element)
         }
     }
-    goTo(id:number) {
-        if(id==0){
+    goTo(id:any) {
+        if(id=='0'){
             window.open(`/participantes-form/${id}`, "_blank")
           }else{
             window.open(`/participantes-form/${id}`, "_blank")
@@ -82,30 +74,29 @@ export class PersonasComponent implements OnInit {
 
     deleteSelectedPersonas() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected participantes?',
-            header: 'Confirm',
+            message: 'Estas seguro que deseas borrar a los participantes?',
+            header: 'Confirmar',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 this.personas = this.personas.filter(val => !this.selectedPersonas.includes(val));
                 this.selectedPersonas = [];
-                this.messageService.add({severity:'success', summary: 'Successful', detail: 'Personas Deleted', life: 3000});
+                this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante borrado de registro', life: 3000});
             }
         });
     }
 
     deletePersona(persona: Persona) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + persona.nombre + '?',
-            header: 'Confirm',
+            message: 'Estas seguro que deseas borrar ' + persona.nombre + '?',
+            header: 'Confirmar',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                let id:number =+persona.id!
-                // this.personaService.delete(id,0).subscribe(personas => {
-                //     console.log(personas)
-                //   });
-                this.personas = this.personas.filter(val => val.id !== persona.id);
-                this.persona = {};
-                this.messageService.add({severity:'success', summary: 'Successful', detail: 'Persona Deleted', life: 3000});
+                let id = persona._id!
+                this.personaService.delete(id,0).subscribe(personas => {
+                    this.personas = this.personas.filter(val => val._id !== persona._id);
+                    this.persona = {};
+                    this.messageService.add({severity:'success', summary: 'Successful', detail: 'Persona Deleted', life: 3000});
+                  });
             }
         });
     }

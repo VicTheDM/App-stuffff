@@ -1,5 +1,5 @@
 export interface Persona {
-    id ?:string;
+    _id ?:string;
     nombre ?:string;
     correo ?:string;
     dependencia ?:string;
@@ -7,6 +7,6 @@ export interface Persona {
     evento ?:string;
     asistencias ?:number;
     asistencias_requeridas ?:number;
-    fechas ?:any[];
+    fechas ?: any[];
     status ?:number
 }

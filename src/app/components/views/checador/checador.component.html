@@ -1,0 +1,13 @@
+<main class="container">
+<qrcode [(qrdata)]="qrCodeStr" [width]="300" [errorCorrectionLevel]="'M'"></qrcode>
+
+<button (click)="action.isStart ? action.stop() : action.start()">{{action.isStart ? 'Stop' : 'Start'}}</button>
+<ngx-scanner-qrcode #action="scanner" (event)="onEvent($event, action)"></ngx-scanner-qrcode>
+
+<!-- Loading -->
+<p *ngIf="action.isLoading">⌛ Loading...</p>
+
+<!-- start -->
+
+</main>
+

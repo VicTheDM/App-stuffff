@@ -14,16 +14,13 @@ export class PersonasService {
 
     private endpoints ={      
         0: "Participante",
-        1: "Asistencia",
-        2: "Evento",
+        1: "Asistencias",
+        2: "Eventos",
         3: "user"    
     }
     private finalEndpoint = '';
     constructor(private http: HttpClient) { }
 
-    public test(): Observable<any[]> {    
-      return this.http.get<any[]>(`http://monorail.proxy.rlwy.net:36146/user/getAll`);
-    }
     public getAll(url:number): Observable<any[]> {
         this.finalEndpoint = this.endpoints[url];        
         return this.http.get<any[]>(`${environment.apiUrl}/${this.finalEndpoint}`);
@@ -32,7 +29,7 @@ export class PersonasService {
       public update(hero: any, url:number): Observable<any[]> {
         this.finalEndpoint = this.endpoints[url];
         return this.http.put<any[]>(
-          `${environment.apiUrl}/${this.finalEndpoint}`, hero);
+          `${environment.apiUrl}/${this.finalEndpoint}/${hero._id}`, hero);
       }
     
       public create(hero: any,url:number): Observable<any[]> {
@@ -41,7 +38,7 @@ export class PersonasService {
           `${environment.apiUrl}/${this.finalEndpoint}`,hero );
       }
     
-      public delete(id: number, url:number): Observable<any[]> {
+      public delete(id: string, url:number): Observable<any[]> {
         this.finalEndpoint = this.endpoints[url];
         return this.http.delete<any[]>(
           `${environment.apiUrl}/${this.finalEndpoint}/${id}`

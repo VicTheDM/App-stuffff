@@ -1,12 +1,12 @@
 export class PersonasInit {
-    id                     ?: any;
+    _id                     ?: any;
     nombre                 ?= '';
     correo                 ?= '';
     dependencia            ?= '';
     asistencias            ?: number;
-    evento            ?= '';
+    evento                 ?= '';
     asistencias_requeridas            ?: number;
-    eventoId               ?: number;
+    eventoId               ?: string;
     fechas                 ?: any[];
     status                 ?:number
     }

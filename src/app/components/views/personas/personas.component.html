@@ -11,7 +11,7 @@
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" (input)="dt.filterGlobal($event.target.value!, 'contains')" placeholder="Buscar..." />
             </span>
-            <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="goTo(0)"></button>
+            <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="goTo('0')"></button>
         </div></div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -19,7 +19,7 @@
             <th style="width: 3rem">
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+            <!-- <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th> -->
             <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
             <th pSortableColumn="correo">Correo <p-sortIcon field="correo"></p-sortIcon></th>
             <th pSortableColumn="dependencia">Dependencia <p-sortIcon field="dependencia"></p-sortIcon></th>
@@ -34,11 +34,11 @@
             <td>
                 <p-tableCheckbox [value]="persona"></p-tableCheckbox>
             </td>
-            <td>{{persona.id}}</td>
+            <!-- <td>{{persona._id}}</td> -->
             <td>{{persona.nombre}}</td>
             <td>{{persona.correo}}</td>
             <td>{{persona.dependencia}}</td>
-            <td>{{getEvento(persona.eventoId)}}</td>
+            <td>{{persona.evento}}</td>
             <td>{{persona.asistencias}} / {{persona.asistencias_requeridas}}  </td>
             <td >
                 <div >
@@ -63,7 +63,7 @@
                 <ng-template> 
                     
                 </ng-template><div class="position-absolute actions">
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"  routerLink='/participantes-form/{{persona.id}}'></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"  routerLink='/participantes-form/{{persona._id}}'></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"  (click)="deletePersona(persona)"></button>
                 </div>
             </td>
@@ -72,4 +72,7 @@
 </p-table>
 
 
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>.
+
+<!-- Toast para el feedback de la acción -->
+<p-toast></p-toast>

@@ -14,16 +14,26 @@ import { PrimeNgModule } from './components/prime-ng.module';
 import { CommonModule } from '@angular/common';  
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PersonasFormComponent } from './components/views/personas/personas-form/personas-form.component';
+import { ChecadorComponent } from './components/views/checador/checador.component';
+
+import { QRCodeModule } from 'angularx-qrcode';
+import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
+LOAD_WASM().subscribe((res: any) => console.log('LOAD_WASM', res));
 @NgModule({
   declarations: [
     AppComponent,
+    ChecadorComponent,
     AsistenciasComponent,
     EventosComponent,
     PersonasComponent,
+    PersonasFormComponent,
     LoginComponent,
     MenuComponent
   ],
   imports: [
+    QRCodeModule,
+    NgxScannerQrcodeModule,
     BrowserModule,
     RouterModule,
     CommonModule,

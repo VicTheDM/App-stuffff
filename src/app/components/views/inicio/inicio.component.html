@@ -1,7 +1,29 @@
 <p-menubar [model]="items">
     <ng-template pTemplate="start">
-        <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" />
+        <img src="/assets/222.png" height="40" class="mr-2" />
     </ng-template>
     <ng-template pTemplate="end">
     </ng-template>
 </p-menubar>
+
+ <!-- Load Font Awesome Icon Library -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+ 
+ <div class="row">
+   <button class="column"routerLink="/participantes">
+     <h2>Participantes</h2>
+   </button>
+   <button class="column"routerLink="/eventos">
+     <h2>Eventos</h2>
+   </button>
+ </div>
+ 
+ <div class="row">
+   <button class="column" routerLink="/asistencias">
+     <h2>Lista de asistencias</h2>
+   </button>
+   <button class="column" routerLink="/checador">
+     <h2>Checador</h2>
+   </button>
+ </div> 

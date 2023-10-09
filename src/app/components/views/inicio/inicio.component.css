@@ -1,0 +1,20 @@
+.column {
+    float: left;
+    width: 45%;
+    padding: 50px;
+    margin: 20px;
+    box-shadow: 0 0 10px 3px rgb(0 0 0 / 21%);
+    border-color: transparent !important;
+    background-color: rgb(222, 222, 222);
+
+  }
+  .column:hover {
+    background-color: #adadad !important;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }

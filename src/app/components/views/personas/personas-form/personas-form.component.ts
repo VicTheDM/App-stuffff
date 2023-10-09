@@ -8,6 +8,8 @@ import moment from 'moment';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Persona } from '../../../../domain/personas';
 import { Eventos } from '../../../../domain/eventos';
+import { MenuItem } from 'primeng/api';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-participantes-form',
@@ -16,7 +18,18 @@ import { Eventos } from '../../../../domain/eventos';
   providers: [ConfirmationService,MessageService,PersonasService]
 })
 export class PersonasFormComponent {
-  @Input() doc: PersonasInit;
+  @Input() doc={
+    _id                     : '',
+    nombre                 : '',
+    correo                 : '',
+    dependencia            : '',
+    asistencias            : 0,
+    evento                 : '',
+    asistencias_requeridas : 0,
+    eventoId               : '',
+    fechas                 : [],
+    status                 :0
+  };
   personas: Persona[];
   eventos: Eventos[]
   _id: any;
@@ -26,6 +39,7 @@ export class PersonasFormComponent {
   constructor(
     private personaService: PersonasService,
     private route: ActivatedRoute, 
+    private location: Location,
     private messageService: MessageService, 
     private formBuilder         : FormBuilder,
 
@@ -43,25 +57,10 @@ export class PersonasFormComponent {
     asistencias_requeridas  : new FormControl(0),
     status                  : new FormControl(1),
   });
-  }
-  ngOnInit() {
-    this.getIdFromRoute(); 
-  }
 
-  changeEvent(event:any){
-    console.log(event)
-    this.doc.asistencias_requeridas = this.eventos.find(val => val._id == event)!.asistencias_requeridas;
-    this.simpleForm.patchValue({
-      asistencias_requeridas: this.doc.asistencias_requeridas
-    })
-  }
-
-  getIdFromRoute() {
+  this.getIdFromRoute(); 
     this.route.params.subscribe((params) => {
       this._id = params['_id'];
-
-      console.log(params)
-      console.log(this._id)
       if (this._id !== '0'){
         this.personaService.getAll(0).subscribe(personas => {
           this.personaService.getAll(1).subscribe(asistencias => {
@@ -73,7 +72,6 @@ export class PersonasFormComponent {
               let fechasPart:any[] = []
               asistencias.forEach(element2 => {
                 if (element2.participanteId == this.doc._id) {
-                  console.log(element2.participanteId + '  ' + this.doc._id)
                   asis = asis + 1
                   fechasPart.push(moment(element2.fecha).format("YYYY-MM-DD"))
                 }
@@ -95,6 +93,23 @@ export class PersonasFormComponent {
                 status: this.doc.status
               })
 
+              this.items = [
+            
+                {
+                    label: 'Inicio',
+                    icon: 'pi pi-fw pi-home',
+                    routerLink:'/inicio'
+                },
+                {
+                    label: 'Participantes',
+                    icon: 'pi pi-fw pi-user',
+                    routerLink:'/participantes'
+                },
+                {
+                    label: ''+this.doc.nombre,
+                    icon: 'pi pi-fw pi-pencil'
+                }
+            ];
             });
           });
         });
@@ -127,9 +142,43 @@ export class PersonasFormComponent {
           })
         });
         
+      this.items = [
+            
+        {
+            label: 'Inicio',
+            icon: 'pi pi-fw pi-home',
+            routerLink:'/inicio'
+        },
+        {
+            label: 'Participantes',
+            icon: 'pi pi-fw pi-user',
+            routerLink:'/participantes'
+        },
+        {
+            label: 'Nuevo participante',
+            icon: 'pi pi-fw pi-pencil'
+        }
+    ];
       }    
-        
     });
+  }
+  items: MenuItem[] | undefined;
+
+  ngOnInit() {
+    
+    
+  }
+
+  changeEvent(event:any){
+    this.doc.asistencias_requeridas = this.eventos.find(val => val._id == event)!.asistencias_requeridas;
+    this.simpleForm.patchValue({
+      asistencias_requeridas: this.doc.asistencias_requeridas
+    })
+  }
+
+  getIdFromRoute() {
+    
+    
   }
 
   async fillTotal(){
@@ -149,7 +198,8 @@ changeDate(event:any, index:number){
     await this.personaService.create(this.simpleForm.value,0).subscribe(personas => {
       this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante registrado', life: 1000});
       setTimeout(() => {
-        window.close()
+        window.close();
+        this.location.back();
       }, 1000)
     });
   }
@@ -158,6 +208,7 @@ changeDate(event:any, index:number){
       this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante actualizado', life: 1000});
       setTimeout(() => {
         window.close()
+        this.location.back();
       }, 1000)
     });
   }

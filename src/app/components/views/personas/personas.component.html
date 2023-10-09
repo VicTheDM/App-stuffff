@@ -1,19 +1,15 @@
+<p-menubar [model]="items">
+    <ng-template pTemplate="start">
+        <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" />
+    </ng-template>
+    <ng-template pTemplate="end">
+        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value!, 'contains')" placeholder="Buscar..." />
+        <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="goTo('0')"></button>
+    </ng-template>
+</p-menubar>
 <p-table #dt [value]="personas" [rows]="10" [paginator]="true" [globalFilterFields]="['nombre','dependencia', 'evento','status']"
     [(selection)]="selectedPersonas" [rowHover]="true" dataKey="id"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-    <ng-template pTemplate="caption">
-        <div class="flex ">
-            <h5 class="m-0">Participantes</h5>
-            <div class="right" style="position: absolute; right: 0;">
-            <button pButton pRipple *ngIf="selectedPersonas.length" [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedPersonas()" [disabled]="!selectedPersonas || !selectedPersonas.length"></button>
-            <button pButton pRipple *ngIf="selectedPersonas.length" label="Exportar" icon="pi pi-upload" class="p-button-help"></button>
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value!, 'contains')" placeholder="Buscar..." />
-            </span>
-            <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="goTo('0')"></button>
-        </div></div>
-    </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th style="width: 3rem">

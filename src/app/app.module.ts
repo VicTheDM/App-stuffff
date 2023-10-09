@@ -19,10 +19,13 @@ import { ChecadorComponent } from './components/views/checador/checador.componen
 
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 LOAD_WASM().subscribe((res: any) => console.log('LOAD_WASM', res));
+import { InicioComponent } from './components/views/inicio/inicio.component';
 @NgModule({
   declarations: [
     AppComponent,
+    InicioComponent,
     ChecadorComponent,
     AsistenciasComponent,
     EventosComponent,
@@ -44,7 +47,8 @@ LOAD_WASM().subscribe((res: any) => console.log('LOAD_WASM', res));
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

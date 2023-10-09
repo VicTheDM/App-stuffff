@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Persona } from '../../../domain/personas';
 import { PersonasService } from '../../../services/personas.service';
+import { MenuItem } from 'primeng/api';
 
 @Component({
     selector: 'app-participantes',
@@ -35,7 +36,22 @@ export class PersonasComponent implements OnInit {
         getAsistencia(id:number){
             return this.asistencias.find(val => val.id == id).nombre
         }
+        items: MenuItem[] | undefined;
+
     async ngOnInit() {
+        this.items = [
+            
+            {
+                label: 'Inicio',
+                icon: 'pi pi-fw pi-home',
+                routerLink:'/inicio'
+            },
+            {
+                label: 'Participantes',
+                icon: 'pi pi-fw pi-user',
+                routerLink:'/participantes'
+            }
+        ];
         await this.personaService.getAll(0).subscribe(data => {
             this.personas = data
         this.personaService.getAll(1).subscribe(data => {

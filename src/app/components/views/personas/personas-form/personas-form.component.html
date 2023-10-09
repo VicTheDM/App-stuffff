@@ -1,7 +1,14 @@
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+      <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" />
+  </ng-template>
+  <ng-template pTemplate="end">
+    <button pButton pRipple label="Editar" icon="pi pi-pencil" class="p-button-success mr-2" (click)="updateDoc()" *ngIf="doc._id"></button>
+    <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-success mr-2" (click)="createDoc()" *ngIf="!doc._id"></button>
+  </ng-template>
+</p-menubar>
 <main class="container">
     <form [formGroup]="this.simpleForm" >
-    <h2>{{ doc.nombre?? this.simpleForm.value.nombre}}</h2>
-    <h2>{{ doc._id??0 }}</h2>
         Nombre(s):
         <input #nombre formControlName="nombre" class="form-control"   placeholder="Name"/>
     
@@ -43,8 +50,6 @@
         </div> -->
 </form>
 </main>
-    <button (click)="updateDoc()" *ngIf="doc._id">Update</button>
-    <button (click)="createDoc()" *ngIf="!doc._id">Create</button>
    
 <!-- Toast para el feedback de la acción -->
 <p-toast></p-toast>

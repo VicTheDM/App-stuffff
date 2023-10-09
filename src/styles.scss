@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/scss/bootstrap";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import '~primeicons/primeicons.css';
+
+.position-absolute.actions {
+  top: 50%;
+  right: 0;
+  display: flex;
+  transform: translate3d(0, -50%, 0);
+  visibility: hidden;
+}
+
+.position-absolute.actions button {
+  margin: 0 0 0 .5rem;
+}
+
+.actions:hover,
+tr:hover .position-absolute.actions {
+  visibility: visible;
+}
+
+.menu_btn {
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
+
+.btn-menu {
+  height: 50px;
+}
+.p-datatable-thead:not(:hover) th[aria-sort="none"] .p-element,
+.p-datatable-thead:not(:hover) .p-element button:not(.p-column-filter-menu-button-active) {
+  display: none;
+}
+.show_menu .offcanvas-start {
+  transform: translateX(0%);
+  visibility: visible;
+}
+.show_menu {
+  .mask-shadow {
+    background: rgb(0 0 0 / 90%);
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 200vh;
+    height: 100%;
+  }
+}
+
+.input-group-text,
+.menu_btn .btn:not(._tab),
+.btn:not(._tab),
+.table,
+.nav .nav-link:not(._tab),
+.dropdown-item {
+  color: rgb(122, 158, 212) !important;
+}
+
+.dropdown-menu.show{
+  background-color: #232427;
+}

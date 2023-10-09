@@ -14,13 +14,18 @@ import { allIcons } from 'angular-feather/icons';
 import { ToastModule } from "primeng/toast";
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
+import { PrimeIcons, MenuItem } from 'primeng/api';
+import { ButtonModule } from "primeng/button";
 LOAD_WASM().subscribe((res: any) => console.log('LOAD_WASM', res));
+import { MenubarModule } from 'primeng/menubar';
 @NgModule({
   imports: [
     FeatherModule.pick(allIcons),
   ],
   exports: [
+    MenubarModule,
     ToastModule,
+    ButtonModule,
     TableModule,
     QRCodeModule,
     NgxScannerQrcodeModule,
@@ -31,8 +36,7 @@ LOAD_WASM().subscribe((res: any) => console.log('LOAD_WASM', res));
     AppRoutingModule,
     FeatherModule,
   ],
-  providers: [MessageService, ConfirmationService],
-  declarations: [  ]
+  providers: [MessageService, ConfirmationService]
 
 })
 export class PrimeNgModule {}

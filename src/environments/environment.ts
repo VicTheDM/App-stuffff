@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://roundhouse.proxy.rlwy.net:40614"
+  apiUrl: "https://roundhouse.proxy.rlwy.net:40614"
 };
 
 /*

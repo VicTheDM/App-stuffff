@@ -8,7 +8,7 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class MenuComponent  implements OnInit{
   visibleSidebar = false;
-  public fecha                    : any;
+  // public fecha                    : any;
 
   public nombre                   : string = 'Pepe';
   public rol                      : string = 'Jefe';
@@ -20,20 +20,22 @@ export class MenuComponent  implements OnInit{
   public isCollapsed5              = true;
   public isCollapsed9              = true;
   public SECTIONS : any = {
-    "documentos": true,
-    "perfil": true,
-    "reportes": true,
-    "reportesUsuario": true,
+    "documentos": false,
+    "perfil": false,
+    "reportes": false,
+    "reportesUsuario": false,
     "checador": true,
-    "reportesDocumentos": true,
-    "reportesGeneral": true,
-    "correo": true,
+    "eventos": true,
+    "reportesDocumentos": false,
+    "reportesGeneral": false,
+    "correo": false,
+    "asistencias": true,
     "participantes": true,
   };
   constructor(
     private primengConfig: PrimeNGConfig
     ) {
-    this.fecha = new Date().toLocaleString();
+    // this.fecha = new Date().toLocaleString();
 
   }
   avatar() {
@@ -50,14 +52,16 @@ export class MenuComponent  implements OnInit{
     setTimeout(() => {
         // const permitions = this.UserL.permissions;
         this.SECTIONS = { //Si la sentencia no se cumple se muestra como se haya programado
-          "documentos": true,
-          "perfil": true,
-          "reportes": true,
-          "reportesUsuario": true,
+          "documentos": false,
+          "perfil": false,
+          "reportes": false,
+          "reportesUsuario": false,
           "checador": true,
-          "reportesDocumentos": true,
-          "reportesGeneral": true,
-          "correo": true,
+          "reportesDocumentos": false,
+          "eventos": true,
+          "asistencias": true,
+          "reportesGeneral": false,
+          "correo": false,
           "participantes": true,
         }
       }, 1000);

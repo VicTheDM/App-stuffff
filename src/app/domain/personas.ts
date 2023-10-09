@@ -3,7 +3,7 @@ export interface Persona {
     nombre ?:string;
     correo ?:string;
     dependencia ?:string;
-    eventoId ?:number;
+    eventoId ?:string;
     evento ?:string;
     asistencias ?:number;
     asistencias_requeridas ?:number;

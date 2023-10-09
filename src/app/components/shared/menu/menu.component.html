@@ -27,10 +27,21 @@
               </li>
               <li class="nav-item" *ngIf="SECTIONS.checador">
                 <a class="nav-link" routerLink="/checador">
-                    <i-feather name="user"></i-feather>
+                    <i-feather name="camera"></i-feather>
                     <span>Checador</span>
                 </a>
             </li>
+            <li class="nav-item" *ngIf="SECTIONS.eventos">
+              <a class="nav-link" routerLink="/eventos">
+                  <i-feather name="list"></i-feather>
+                  <span>Eventos</span>
+              </a>
+          </li><li class="nav-item" *ngIf="SECTIONS.asistencias">
+            <a class="nav-link" routerLink="/asistencias">
+                <i-feather name="list"></i-feather>
+                <span>Asistencias</span>
+            </a>
+        </li>
                 <li>
                     <a class="h6 mt-3" role="button" class="collapse_title" [attr.aria-expanded]="!isCollapsed"
                         aria-controls="collapse_1" *ngIf="SECTIONS.reportes" (click)="collapse.toggle()">

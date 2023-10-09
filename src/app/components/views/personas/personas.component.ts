@@ -13,9 +13,9 @@ import { MenuItem } from 'primeng/api';
 export class PersonasComponent implements OnInit {
 
     personaDialog: boolean;
-    personas: Persona[];
-    eventos: any[];
-    asistencias: any[];
+    personas: Persona[]=[];
+    eventos: any[]=[];
+    asistencias: any[]=[];
     persona: Persona;
     selectedPersonas: Persona[]=[];
     submitted: boolean;
@@ -27,7 +27,28 @@ export class PersonasComponent implements OnInit {
         private confirmationService: ConfirmationService
         ) 
         { 
+            this.items = [
             
+                {
+                    label: 'Inicio',
+                    icon: 'pi pi-fw pi-home',
+                    routerLink:'/inicio'
+                },
+                {
+                    label: 'Participantes',
+                    icon: 'pi pi-fw pi-user',
+                    routerLink:'/participantes'
+                }
+            ];
+            this.personaService.getAll(0).subscribe(data => {
+                this.personas = data 
+            });
+            this.personaService.getAll(1).subscribe(data => {
+                this.asistencias = data
+            });
+            this.personaService.getAll(2).subscribe(data => {
+                this.eventos = data
+            });
         }
 
         getEvento(id:number){
@@ -39,33 +60,15 @@ export class PersonasComponent implements OnInit {
         items: MenuItem[] | undefined;
 
     async ngOnInit() {
-        this.items = [
-            
-            {
-                label: 'Inicio',
-                icon: 'pi pi-fw pi-home',
-                routerLink:'/inicio'
-            },
-            {
-                label: 'Participantes',
-                icon: 'pi pi-fw pi-user',
-                routerLink:'/participantes'
-            }
-        ];
-        await this.personaService.getAll(0).subscribe(data => {
-            this.personas = data
-        this.personaService.getAll(1).subscribe(data => {
-            this.asistencias = data
-        this.personaService.getAll(2).subscribe(data => {
-            this.eventos = data
+        setTimeout(()=>{
             this.fillTotal();
-        });});});
+        },1500)
     }
 
     async fillTotal(){
         let total = this.personas
-        for (let index = 0; index < total.length; index++) {
-            const element = total[index];
+        for (let index = 0; index < this.personas.length; index++) {
+            const element = this.personas[index];
             let asis = 0
             let fechasPart:any[] = []
             this.asistencias.forEach(element2 => {

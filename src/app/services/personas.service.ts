@@ -16,7 +16,7 @@ export class PersonasService {
         0: "Participante",
         1: "Asistencias",
         2: "Eventos",
-        3: "user"    
+        3: "Asistencias"    
     }
     private finalEndpoint = '';
     constructor(private http: HttpClient) { }

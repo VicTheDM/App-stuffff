@@ -37,7 +37,7 @@
             <td>{{persona.evento}}</td>
             <td>{{persona.asistencias}} / {{persona.asistencias_requeridas}}  </td>
             <td >
-                <div >
+                <div *ngIf="persona.fechas">
                     <div>
                         {{(persona.fechas[0] | date)??''}}
                     </div>

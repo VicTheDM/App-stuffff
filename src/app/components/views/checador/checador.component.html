@@ -1,5 +1,13 @@
+<p-menubar [model]="items">
+    <ng-template pTemplate="start">
+        <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" />
+    </ng-template>
+    <ng-template pTemplate="end">
+    </ng-template>
+</p-menubar>
+
 <main class="container">
-<qrcode [(qrdata)]="qrCodeStr" [width]="300" [errorCorrectionLevel]="'M'"></qrcode>
+<!-- <qrcode [(qrdata)]="qrCodeStr" [width]="300" [errorCorrectionLevel]="'M'"></qrcode> -->
 
 <button (click)="action.isStart ? action.stop() : action.start()">{{action.isStart ? 'Stop' : 'Start'}}</button>
 <ngx-scanner-qrcode #action="scanner" (event)="onEvent($event, action)"></ngx-scanner-qrcode>
@@ -10,4 +18,6 @@
 <!-- start -->
 
 </main>
+<!-- Toast para el feedback de la acción -->
+<p-toast></p-toast>
 

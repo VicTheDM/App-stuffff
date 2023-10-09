@@ -1,0 +1,23 @@
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+      <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" />
+  </ng-template>
+  <ng-template pTemplate="end">
+    <button pButton pRipple label="Editar" icon="pi pi-pencil" class="p-button-success mr-2" (click)="updateDoc()" *ngIf="doc._id"></button>
+    <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-success mr-2" (click)="createDoc()" *ngIf="!doc._id"></button>
+  </ng-template>
+</p-menubar>
+<main class="container">
+    <form [formGroup]="this.simpleForm" >
+        Nombre(s):
+        <input #nombre formControlName="nombre" class="form-control"   placeholder="Name"/>
+
+        
+        Asistencias Requeridas:
+        <input type="number" #asistencias_requeridas formControlName="asistencias_requeridas"  class="form-control"  placeholder="asistencias_requeridas"/>
+
+</form>
+</main>
+   
+<!-- Toast para el feedback de la acción -->
+<p-toast></p-toast>

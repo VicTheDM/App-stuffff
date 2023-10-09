@@ -22,10 +22,16 @@ import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 LOAD_WASM().subscribe((res: any) => console.log('LOAD_WASM', res));
 import { InicioComponent } from './components/views/inicio/inicio.component';
+import { EventosFormComponent } from './components/views/eventos/eventos-form/eventos-form.component';
+import { ToastModule } from "primeng/toast";
+import { AsistenciasFormComponent } from './components/views/asistencias/asistencias-form/asistencias-form.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
+    AsistenciasFormComponent,
+    EventosFormComponent,
     ChecadorComponent,
     AsistenciasComponent,
     EventosComponent,
@@ -36,6 +42,7 @@ import { InicioComponent } from './components/views/inicio/inicio.component';
   ],
   imports: [
     QRCodeModule,
+    ToastModule,
     NgxScannerQrcodeModule,
     BrowserModule,
     RouterModule,

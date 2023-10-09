@@ -1,0 +1,22 @@
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+      <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" />
+  </ng-template>
+  <ng-template pTemplate="end">
+    <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-success mr-2" (click)="createDoc()" *ngIf="!doc._id"></button>
+  </ng-template>
+</p-menubar>
+<main class="container">
+    <form [formGroup]="this.simpleForm" >    
+        Participante
+        <select class="form-control" formControlName="participanteId" name="participanteId" id="participanteId" #participanteId (change)="changeEvent($event.target.value)">
+          <option [value]='' selected>Seleccione una opción...</option>
+          <option *ngFor="let participante of this.personas" value="{{participante._id}}" >{{participante.nombre}}</option>
+      </select>      
+      Fecha:
+      <input type="date" #fecha formControlName="fecha" class="form-control"   placeholder="fecha"/>    
+</form>
+</main>
+   
+<!-- Toast para el feedback de la acción -->
+<p-toast></p-toast>

@@ -12,22 +12,16 @@ import { MenuItem } from 'primeng/api';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-participantes-form',
-  templateUrl: './personas-form.component.html',
-  styleUrls: ['./personas-form.component.css'],
+  selector: 'app-eventos-form',
+  templateUrl: './eventos-form.component.html',
+  styleUrls: ['./eventos-form.component.css'],
   providers: [ConfirmationService,MessageService,PersonasService]
 })
-export class PersonasFormComponent {
+export class EventosFormComponent {
   @Input() doc={
     _id                     : '',
     nombre                 : '',
-    correo                 : '',
-    dependencia            : '',
-    asistencias            : 0,
-    evento                 : '',
     asistencias_requeridas : 0,
-    eventoId               : '',
-    fechas                 : [],
     status                 :0
   };
   personas: Persona[];
@@ -62,35 +56,13 @@ export class PersonasFormComponent {
     this.route.params.subscribe((params) => {
       this._id = params['_id'];
       if (this._id !== '0'){
-        this.personaService.getAll(0).subscribe(personas => {
-          this.personaService.getAll(1).subscribe(asistencias => {
             this.personaService.getAll(2).subscribe(eventos => {
               this.eventos=eventos;
-              this.personas = personas
-              this.doc = personas.find(val => val._id == this._id)
-              let asis = 0
-              let fechasPart:any[] = []
-              asistencias.forEach(element2 => {
-                if (element2.participanteId == this.doc._id) {
-                  asis = asis + 1
-                  fechasPart.push(moment(element2.fecha).format("YYYY-MM-DD"))
-                }
-              });
-              this.doc.evento = eventos.find(val => val._id == this.doc.eventoId).nombre
-              this.doc.asistencias = asis
-              this.doc.asistencias_requeridas = eventos.find(val => val._id == this.doc.eventoId).asistencias_requeridas
-              this.doc.fechas = fechasPart!
+              this.doc = eventos.find(val => val._id == this._id)
               this.simpleForm.patchValue({
                 _id: this.doc._id,
                 nombre: this.doc.nombre,
-                asistencias: this.doc.asistencias,
-                correo: this.doc.correo,
-                dependencia: this.doc.dependencia,
-                eventoId: this.doc.eventoId,
                 asistencias_requeridas: this.doc.asistencias_requeridas,
-                fechas: this.doc.fechas,
-                evento: this.doc.evento,
-                status: this.doc.status
               })
 
               this.items = [
@@ -101,9 +73,9 @@ export class PersonasFormComponent {
                     routerLink:'/inicio'
                 },
                 {
-                    label: 'Participantes',
+                    label: 'Eventos',
                     icon: 'pi pi-fw pi-user',
-                    routerLink:'/participantes'
+                    routerLink:'/eventos'
                 },
                 {
                     label: ''+this.doc.nombre,
@@ -111,33 +83,19 @@ export class PersonasFormComponent {
                 }
             ];
             });
-          });
-        });
       }else{
         this.personaService.getAll(2).subscribe(eventos => {
           this.eventos=eventos;
           this.doc ={
             _id: '',
             nombre: '',
-            asistencias: 0,
-            correo: '',
-            dependencia: '',
-            eventoId: '',
             asistencias_requeridas: 0,
-            fechas: [],
-            evento: '',
             status: 1
           }          
           this.simpleForm.patchValue({
             _id: '',
             nombre: '',
-            asistencias: 0,
-            correo: '',
-            dependencia: '',
-            eventoId: '',
             asistencias_requeridas: 0,
-            fechas: [],
-            evento: '',
             status: 1
           })
         });
@@ -150,12 +108,12 @@ export class PersonasFormComponent {
             routerLink:'/inicio'
         },
         {
-            label: 'Participantes',
+            label: 'Eventos',
             icon: 'pi pi-fw pi-user',
             routerLink:'/participantes'
         },
         {
-            label: 'Nuevo participante',
+            label: 'Nuevo evento',
             icon: 'pi pi-fw pi-pencil'
         }
     ];
@@ -185,17 +143,8 @@ export class PersonasFormComponent {
     let total = this.doc
 }
 
-  addFecha(event?:any): void {
-    this.doc.fechas!.push(moment().format("YYYY-MM-DD")  );
-  }
-  removeFecha(index: number): void {
-    this.doc.fechas!.splice(index, 1)
-}
-changeDate(event:any, index:number){
-  this.doc.fechas![index] = event
-}
   async createDoc() {
-    await this.personaService.create(this.simpleForm.value,0).subscribe(personas => {
+    await this.personaService.create(this.simpleForm.value,2).subscribe(personas => {
       this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante registrado', life: 1000});
       setTimeout(() => {
         this.location.back();
@@ -203,7 +152,7 @@ changeDate(event:any, index:number){
     });
   }
   updateDoc() {    
-    this.personaService.update(this.simpleForm.value,0).subscribe(personas => {
+    this.personaService.update(this.simpleForm.value,2).subscribe(personas => {
       this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante actualizado', life: 1000});
       setTimeout(() => {
         this.location.back();

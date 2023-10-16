@@ -20,6 +20,7 @@ export class PersonasComponent implements OnInit {
     selectedPersonas: Persona[]=[];
     submitted: boolean;
     statuses: any[];
+    timmer          : any;
 
     constructor(
         private personaService: PersonasService, 
@@ -40,15 +41,22 @@ export class PersonasComponent implements OnInit {
                     routerLink:'/participantes'
                 }
             ];
-            this.personaService.getAll(0).subscribe(data => {
-                this.personas = data 
-            });
-            this.personaService.getAll(1).subscribe(data => {
-                this.asistencias = data
-            });
-            this.personaService.getAll(2).subscribe(data => {
-                this.eventos = data
-            });
+            this.timmer = this.getStuff();
+        }
+
+        async getStuff(){
+                await this.personaService.getAll(0).subscribe(data => {
+                    this.personas = data                    
+                    setTimeout(()=>{
+                        this.fillTotal();
+                    },500)
+                });
+                await this.personaService.getAll(1).subscribe(data => {
+                    this.asistencias = data
+                });
+                await this.personaService.getAll(2).subscribe(data => {
+                    this.eventos = data
+                });       
         }
 
         getEvento(id:number){
@@ -60,13 +68,14 @@ export class PersonasComponent implements OnInit {
         items: MenuItem[] | undefined;
 
     async ngOnInit() {
-        setTimeout(()=>{
-            this.fillTotal();
-        },1500)
     }
 
     async fillTotal(){
-        let total = this.personas
+        if(this.personas.length == 0 || this.eventos.length == 0){
+            setTimeout(()=>{
+                this.fillTotal();
+            },500)
+        }
         for (let index = 0; index < this.personas.length; index++) {
             const element = this.personas[index];
             let asis = 0

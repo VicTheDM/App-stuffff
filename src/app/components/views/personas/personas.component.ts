@@ -7,7 +7,7 @@ import { MenuItem } from 'primeng/api';
 @Component({
     selector: 'app-participantes',
     templateUrl: './personas.component.html',
-    styleUrls: ['./personas.component.css'],
+    styleUrls: ['./personas.component.scss'],
     providers: [ConfirmationService,MessageService, PersonasService]
 })
 export class PersonasComponent implements OnInit {
@@ -132,6 +132,10 @@ export class PersonasComponent implements OnInit {
     hideDialog() {
         this.personaDialog = false;
         this.submitted = false;
+    }
+
+    Print(){
+        window.print();
     }
     
 

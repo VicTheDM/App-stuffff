@@ -1,1 +1,87 @@
-
+@media screen {
+    @page {
+      size: landscape;
+      // QUita los margeneres en la impresion
+      margin: 0;
+    }
+    .map{
+      page-break-inside:avoid!important
+    }
+    .d-print-block {
+      display: none !important;
+    }
+  }
+  table.print-friendly tr td, table.print-friendly tr th {
+    page-break-inside: avoid;
+}
+@media print {
+    .print *:not(.colorRedPrint) {
+      color: black !important;
+    }
+    .colorRedPrint {
+      color: red !important;
+    }
+    .window {
+      display: none !important;
+    }
+    .menu_btn{
+      display: none !important;
+    }
+    .print {
+      display: block !important;
+    }
+    th, td, p {
+      text-transform: uppercase;
+    }
+    th,
+    td {
+      line-height: -2px;
+      font-size: 15px;
+      padding: 0 0.25rem !important;
+      border: 1px solid black !important;
+    }
+    th {
+      border-bottom:  1px solid black !important;;
+      font-weight: normal !important;
+    }
+    td {
+    }
+    p {
+      color:black;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    table{
+      margin: 8px,8px,8px,8px !important;
+      border-spacing: 2px !important;
+      border: 1px solid black !important;
+      width:100% !important;
+    }
+    .offcanvas {
+      display: none;
+    }
+    .menu_btn {
+      display: none;
+    }
+    .logo911 {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    .map{
+      margin-left:10%; 
+    }
+    .d-print-none {
+      display: none !important;
+    }
+    .ppp{
+        display: block !important;
+    }
+  
+  }

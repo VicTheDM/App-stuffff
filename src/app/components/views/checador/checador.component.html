@@ -8,7 +8,12 @@
 
 <main class="container">
 <!-- <qrcode [(qrdata)]="qrCodeStr" [width]="300" [errorCorrectionLevel]="'M'"></qrcode> -->
-
+<div >
+    <select #select1 (change)="action.playDevice(select1.value)" class="form-select form-select-sm">
+      <option [value]="null" selected>Select device</option>
+      <option *ngFor="let c of action.devices.value; let i = index" [value]="c.deviceId" [selected]="i == action.deviceIndexActive">{{c.label}}</option>
+    </select>
+  </div>
 <button (click)="action.isStart ? action.stop() : action.start()">{{action.isStart ? 'Stop' : 'Start'}}</button>
 <ngx-scanner-qrcode #action="scanner" (event)="onEvent($event, action)"></ngx-scanner-qrcode>
 

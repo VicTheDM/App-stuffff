@@ -95,7 +95,7 @@ export class AsistenciasComponent implements OnInit {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 let id = persona._id!
-                this.personaService.delete(id,2).subscribe(personas => {
+                this.personaService.delete(id,1).subscribe(personas => {
                     this.personas = this.personas.filter(val => val._id !== persona._id);
                     this.persona = {};
                     this.messageService.add({severity:'success', summary: 'Successful', detail: 'Persona Deleted', life: 3000});

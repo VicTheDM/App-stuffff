@@ -15,8 +15,7 @@ export class PersonasService {
     private endpoints ={      
         0: "Participante",
         1: "Asistencias",
-        2: "Eventos",
-        3: "Asistencias"    
+        2: "Eventos"
     }
     private finalEndpoint = '';
     constructor(private http: HttpClient) { }

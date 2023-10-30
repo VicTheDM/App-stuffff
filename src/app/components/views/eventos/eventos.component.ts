@@ -46,7 +46,6 @@ export class EventosComponent implements OnInit {
             }
         ];
         this.personaService.getAll(2).subscribe(data => {
-            console.log(data)
             this.eventos = data
             this.fillTotal();
         });
@@ -76,17 +75,17 @@ export class EventosComponent implements OnInit {
         });
     }
 
-    deletePersona(persona: Persona) {
+    deletePersona(evento: Persona) {
         this.confirmationService.confirm({
-            message: 'Estas seguro que deseas borrar ' + persona.nombre + '?',
+            message: 'Estas seguro que deseas borrar ' + evento.nombre + '?',
             header: 'Confirmar',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                let id = persona._id!
-                this.personaService.delete(id,2).subscribe(personas => {
-                    this.personas = this.personas.filter(val => val._id !== persona._id);
+                let id = evento._id!
+                this.personaService.delete(id,2).subscribe(eventos => {
+                    this.eventos = this.eventos.filter(val => val._id !== evento._id);
                     this.persona = {};
-                    this.messageService.add({severity:'success', summary: 'Successful', detail: 'Persona Deleted', life: 3000});
+                    this.messageService.add({severity:'success', summary: 'Successful', detail: 'Evento Deleted', life: 3000});
                   });
             }
         });

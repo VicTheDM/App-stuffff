@@ -145,7 +145,7 @@ export class EventosFormComponent {
 
   async createDoc() {
     await this.personaService.create(this.simpleForm.value,2).subscribe(personas => {
-      this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante registrado', life: 1000});
+      this.messageService.add({severity:'success', summary: 'Successful', detail: 'Evento registrado', life: 1000});
       setTimeout(() => {
         this.location.back();
       }, 1000)
@@ -153,7 +153,7 @@ export class EventosFormComponent {
   }
   updateDoc() {    
     this.personaService.update(this.simpleForm.value,2).subscribe(personas => {
-      this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante actualizado', life: 1000});
+      this.messageService.add({severity:'success', summary: 'Successful', detail: 'Evento actualizado', life: 1000});
       setTimeout(() => {
         this.location.back();
       }, 1000)

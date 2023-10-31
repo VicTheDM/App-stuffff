@@ -44,10 +44,15 @@ export class ChecadorComponent {
       ];
     this.qrCodeStr = '65232a5bf9b3ccdff7e424ed';
     this.personaService.getAll(0).subscribe(data => {
-      this.personas = data });
+      this.personas = data  
+    }, error =>     
+    this.messageService.add({severity:'error', summary: 'Participantes error', detail: 'Error, recargue pagina', life: 3000})    
+    );
 
     this.personaService.getAll(1).subscribe(data => {
-      this.asistencias = data });
+      this.asistencias = data }, error =>     
+      this.messageService.add({severity:'error', summary: 'Asistencias error', detail: 'Error, recargue pagina', life: 3000})    
+      );
   }
   async onEvent(e: ScannerQRCodeResult[], action?: any) {
     action.pause()
@@ -67,11 +72,16 @@ export class ChecadorComponent {
       this.messageService.add({severity:'error', summary: 'Falla', detail: 'Participante ya se registro hoy', life: 3000});      
     }else{
       this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante registro', life: 3000});
-      this.personaService.create(envio, 1).subscribe(res=>{
+      this.personaService.create(envio, 1).subscribe(res => {
         this.personaService.getAll(1).subscribe(data => {
-          this.asistencias = data });
-      })
-    }
+          	this.asistencias = data
+        	}, error =>
+          	this.messageService.add({severity:'error', summary: 'Participantes error', detail: 'Error al cargar asistencias', life: 3000})
+          	);
+        	}, error =>
+        	this.messageService.add({severity:'error', summary: 'Participantes error', detail: 'Error al crear asistencia', life: 3000})
+        	);
+      }
     setTimeout(()=>{
       action.play()
     },2000)

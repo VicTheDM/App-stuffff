@@ -46,26 +46,25 @@ export class AsistenciasComponent implements OnInit {
         ];
         
         this.personaService.getAll(0).subscribe(data => {
-            this.personas = data 
-        });
+            this.personas = data         
         this.personaService.getAll(1).subscribe(data => {
-            this.asistencias = data
-        });
+            this.asistencias = data        
         this.personaService.getAll(2).subscribe(data => {
             this.eventos = data
-        });
-
             setTimeout(()=>{
                 this.fillTotal();
-            },1500)
+            },500)
+
+        });});});
+
     }
 
     async fillTotal(){
         let total = this.personas
         for (let index = 0; index < this.asistencias.length; index++) {
             const element = this.asistencias[index];
-            element.evento = this.eventos.find(val => val._id == element.eventoId).nombre
-            element.participante = this.personas.find(val => val._id == element.participanteId).nombre
+            element.evento = (this.eventos.find(val => val._id == element.eventoId)?.nombre || 'Evento borrado')
+            element.participante = (this.personas.find(val => val._id == element.participanteId)?.nombre ||'Participante borrado' )
         }    }
     goTo(id:any) {
         if(id=='0'){

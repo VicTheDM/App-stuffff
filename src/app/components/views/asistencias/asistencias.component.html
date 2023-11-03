@@ -8,8 +8,30 @@
     </ng-template>
 </p-menubar>
 <p-table #dt [value]="asistencias" [rows]="10" [paginator]="true" [globalFilterFields]="['nombre','dependencia', 'evento','status']"
-    [(selection)]="selectedPersonas" [rowHover]="true" dataKey="id"
+    [(selection)]="selectedPersonas" [rowHover]="true" dataKey="_id"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    
+    <ng-template pTemplate="caption">
+        <ng-template [ngIf]="selectedPersonas.length > 0">
+          <div class="dcs">
+            <div class="left">
+              <span class="btn btn-light btn-sm me-1">{{ selectedPersonas.length }}</span>
+              <span> elemento{{ selectedPersonas.length > 1 ? 's' : '' }}</span>
+              <span> seleccionado{{ selectedPersonas.length > 1 ? 's' : '' }}</span>
+            </div>
+            <div class="right dcc">
+              <button type="button" class="btn btn-light mx-1" data-toggle="tooltip" data-placement="bottom" title="Eliminar"
+                (click)="deleteselectedPersonas()">
+                <i-feather name="trash"></i-feather>
+              </button>
+              <button type="button" class="btn btn-light mx-1" data-toggle="tooltip" data-placement="bottom" title="Cancelar"
+                (click)="removeSelection()">
+                <i-feather name="x"></i-feather>
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th style="width: 3rem">

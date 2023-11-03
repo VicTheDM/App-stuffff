@@ -74,18 +74,27 @@ export class AsistenciasComponent implements OnInit {
           }
     }
 
-    deleteSelectedPersonas() {
+    deleteselectedPersonas() {
         this.confirmationService.confirm({
-            message: 'Estas seguro que deseas borrar a los eventos?',
+            message: 'Estas seguro que deseas borrar a los participantes?',
             header: 'Confirmar',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.personas = this.personas.filter(val => !this.selectedPersonas.includes(val));
-                this.selectedPersonas = [];
-                this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante borrado de registro', life: 3000});
+                for (let index = 0; index < this.selectedPersonas.length; index++) {
+                    const id = this.selectedPersonas[index]._id;
+                    this.personaService.delete(id,1).subscribe(personas => {
+                        this.asistencias = this.asistencias.filter(val => val._id !== id);
+                        this.messageService.add({severity:'success', summary: 'Successful', detail: 'Asistencia Deleted', life: 3000});
+                      });
+                }
+                this.selectedPersonas = []
             }
         });
     }
+    
+  removeSelection() {
+    this.selectedPersonas = [];
+  }
 
     deletePersona(asistencia: Persona) {
         this.confirmationService.confirm({

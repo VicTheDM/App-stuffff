@@ -3,30 +3,52 @@
         <div class="column">
             <table class="table" aria-label="tabla-impresion">
                 <tbody style="page-break-inside: avoid;">
-                    <tr *ngFor="let i of personas; let index = index" style="page-break-inside: avoid;">
-                        <td style="page-break-inside: avoid"  *ngIf="0 === index % 2">
-                            <h1 style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
-                                {{i.nombre}}
-                                <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                            </h1>
-                        </td>            
-                    </tr>
+                    <div *ngIf="this.selectedPersonas.length >= 1">
+                        <tr *ngFor="let i of this.selectedPersonas; let index = index" style="page-break-inside: avoid;">
+                            <td style="page-break-inside: avoid"  *ngIf="0 === index % 2">
+                                <h1 style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
+                                    {{i.nombre}}
+                                    <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                                </h1>
+                            </td>            
+                        </tr>
+                    </div>
+                    <div  *ngIf="this.selectedPersonas.length == 0">
+                        <tr *ngFor="let i of personas; let index = index" style="page-break-inside: avoid;">
+                            <td style="page-break-inside: avoid"  *ngIf="0 === index % 2">
+                                <h1 style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
+                                    {{i.nombre}}
+                                    <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                                </h1>
+                            </td>            
+                        </tr>
+                    </div>
                 </tbody>
             </table>
         </div>
         <div class="column">
             <table class="table" aria-label="tabla-impresion">
                 <tbody style="page-break-inside: avoid;">
-                  <tr *ngFor="let i of personas;let index = index" style="page-break-inside: avoid;">
-                    <td style="page-break-inside: avoid"  *ngIf="0 !== index % 2">
-                        <h1 style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
-                            {{i.nombre}}
-                            <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                        </h1>
-                    </td>
-                    
-                  </tr>
-                  <tr>
+                    <div *ngIf="this.selectedPersonas.length >= 1">
+                        <tr *ngFor="let i of this.selectedPersonas; let index = index" style="page-break-inside: avoid;">
+                            <td style="page-break-inside: avoid"  *ngIf="0 !== index % 2">
+                                <h1 style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
+                                    {{i.nombre}}
+                                    <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                                </h1>
+                            </td>            
+                        </tr>
+                    </div>
+                    <div  *ngIf="this.selectedPersonas.length == 0">
+                        <tr *ngFor="let i of personas; let index = index" style="page-break-inside: avoid;">
+                            <td style="page-break-inside: avoid"  *ngIf="0 !== index % 2">
+                                <h1 style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
+                                    {{i.nombre}}
+                                    <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                                </h1>
+                            </td>            
+                        </tr>
+                    </div>
                 </tbody>
               </table>
         </div>

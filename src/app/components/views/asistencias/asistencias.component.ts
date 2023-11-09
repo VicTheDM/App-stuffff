@@ -3,6 +3,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { Persona } from '../../../domain/personas';
 import { PersonasService } from '../../../services/personas.service';
 import { MenuItem } from 'primeng/api';
+import * as FileSaver from 'file-saver';
+import {saveAs} from 'file-saver';
 
 @Component({
     selector: 'app-asistencias',
@@ -20,6 +22,7 @@ export class AsistenciasComponent implements OnInit {
     selectedPersonas: Persona[]=[];
     submitted: boolean;
     statuses: any[];
+    dataPrint: any;
 
     constructor(
         private personaService: PersonasService, 
@@ -116,5 +119,23 @@ export class AsistenciasComponent implements OnInit {
         this.submitted = false;
     }
     
+
+    exportExcel(option:any) {
+        import("xlsx").then(xlsx => {
+              const worksheet     = xlsx.utils.json_to_sheet(this.asistencias);
+              const workbook      = { Sheets: { 'data3': worksheet }, SheetNames: ['data3'] };
+              const excelBuffer   : any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+              this.saveAsExcelFile(excelBuffer, "asistencias");
+          });
+      }
+
+      saveAsExcelFile(buffer, fileName: string): void {
+        const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+        const EXCEL_EXTENSION = '.xlsx';
+        const data: Blob = new Blob([buffer], {
+            type: EXCEL_TYPE
+        });
+        FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    }
 
 }

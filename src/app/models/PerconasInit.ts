@@ -8,5 +8,6 @@ export class PersonasInit {
     asistencias_requeridas            ?: number;
     eventoId               ?: string;
     fechas                 ?: any[];
+    fechaCompleta                 ?= '';
     status                 ?:number
     }

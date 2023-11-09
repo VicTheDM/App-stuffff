@@ -3,6 +3,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { Persona } from '../../../domain/personas';
 import { PersonasService } from '../../../services/personas.service';
 import { MenuItem } from 'primeng/api';
+import * as FileSaver from 'file-saver';
 
 @Component({
     selector: 'app-participantes',
@@ -80,16 +81,19 @@ export class PersonasComponent implements OnInit {
             const element = this.personas[index];
             let asis = 0
             let fechasPart:any[] = []
+            let fechaSingle = ''
             this.asistencias.forEach(element2 => {
                 if(element2.participanteId == element._id){
                     asis = asis+1
                     fechasPart.push(element2.fecha)
+                    fechaSingle += element2.fecha + '  |  '
                 }
             });
             element.evento = this.eventos.find(val => val._id == element.eventoId).nombre
             element.asistencias = asis
             element.asistencias_requeridas = this.eventos.find(val => val._id == element.eventoId).asistencias_requeridas
             element.fechas = fechasPart
+            element.fechaCompleta = fechaSingle
         }
     }
     goTo(id:any) {
@@ -148,4 +152,21 @@ export class PersonasComponent implements OnInit {
     }
     
 
+    exportExcel(option:any) {
+        import("xlsx").then(xlsx => {
+              const worksheet     = xlsx.utils.json_to_sheet(this.personas);
+              const workbook      = { Sheets: { 'data3': worksheet }, SheetNames: ['data3'] };
+              const excelBuffer   : any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+              this.saveAsExcelFile(excelBuffer, "personas");
+          });
+      }
+
+      saveAsExcelFile(buffer, fileName: string): void {
+        const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+        const EXCEL_EXTENSION = '.xlsx';
+        const data: Blob = new Blob([buffer], {
+            type: EXCEL_TYPE
+        });
+        FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    }
 }

@@ -8,5 +8,6 @@ export interface Persona {
     asistencias ?:number;
     asistencias_requeridas ?:number;
     fechas ?: any[];
+    fechaCompleta ?: string;
     status ?:number
 }

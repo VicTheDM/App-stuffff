@@ -64,6 +64,7 @@
         <input pInputText type="text" (input)="dt.filterGlobal($event.target.value!, 'contains')" placeholder="Buscar..." />
         <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="goTo('0')"></button>
         <button pButton pRipple label="Imprimir" icon="pi pi-plus" class="p-button-success mr-2" (click)="Print()"></button>
+        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel(0)" class="p-button-success mx-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
     </ng-template>
 </p-menubar>
 <p-table #dt [value]="personas" [rows]="10" [paginator]="true" [globalFilterFields]="['nombre','dependencia', 'evento','status']"

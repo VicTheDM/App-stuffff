@@ -25,6 +25,8 @@ import { InicioComponent } from './components/views/inicio/inicio.component';
 import { EventosFormComponent } from './components/views/eventos/eventos-form/eventos-form.component';
 import { ToastModule } from "primeng/toast";
 import { AsistenciasFormComponent } from './components/views/asistencias/asistencias-form/asistencias-form.component';
+import { UsuariosComponent } from './components/views/usuarios/usuarios.component';
+import { UsuariosFormComponent } from './components/views/usuarios/usuarios-form/usuarios-form.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { AsistenciasFormComponent } from './components/views/asistencias/asisten
     PersonasComponent,
     PersonasFormComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    UsuariosComponent,
+    UsuariosFormComponent
   ],
   imports: [
     QRCodeModule,

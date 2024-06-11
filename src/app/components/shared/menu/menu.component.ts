@@ -63,6 +63,7 @@ export class MenuComponent  implements OnInit{
           "reportesGeneral": false,
           "correo": false,
           "participantes": true,
+          "usuarios": true,
         }
       }, 1000);
   }

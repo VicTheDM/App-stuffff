@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Persona } from '../../../domain/personas';
-import { PersonasService } from '../../../services/personas.service';
+import { EndpointsService } from '../../../services/endpoints.service';
 import { MenuItem } from 'primeng/api';
 
 @Component({
     selector: 'app-asistencias',
     templateUrl: './asistencias.component.html',
     styleUrls: ['./asistencias.component.css'],
-    providers: [ConfirmationService,MessageService, PersonasService]
+    providers: [ConfirmationService,MessageService, EndpointsService]
 })
 export class AsistenciasComponent implements OnInit {
 
@@ -22,7 +22,7 @@ export class AsistenciasComponent implements OnInit {
     statuses: any[];
 
     constructor(
-        private personaService: PersonasService, 
+        private EndpointsService: EndpointsService, 
         private messageService: MessageService, 
         private confirmationService: ConfirmationService
         ) 
@@ -45,11 +45,11 @@ export class AsistenciasComponent implements OnInit {
             }
         ];
         
-        this.personaService.getAll(0).subscribe(data => {
+        this.EndpointsService.getAll(0).subscribe(data => {
             this.personas = data         
-        this.personaService.getAll(1).subscribe(data => {
+        this.EndpointsService.getAll(1).subscribe(data => {
             this.asistencias = data        
-        this.personaService.getAll(2).subscribe(data => {
+        this.EndpointsService.getAll(2).subscribe(data => {
             this.eventos = data
             setTimeout(()=>{
                 this.fillTotal();
@@ -82,7 +82,7 @@ export class AsistenciasComponent implements OnInit {
             accept: () => {
                 for (let index = 0; index < this.selectedPersonas.length; index++) {
                     const id = this.selectedPersonas[index]._id;
-                    this.personaService.delete(id,1).subscribe(personas => {
+                    this.EndpointsService.delete(id,1).subscribe(personas => {
                         this.asistencias = this.asistencias.filter(val => val._id !== id);
                         this.messageService.add({severity:'success', summary: 'Successful', detail: 'Asistencia Deleted', life: 3000});
                       });
@@ -103,7 +103,7 @@ export class AsistenciasComponent implements OnInit {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 let id = asistencia._id!
-                this.personaService.delete(id,1).subscribe(asistencias => {
+                this.EndpointsService.delete(id,1).subscribe(asistencias => {
                     this.asistencias = this.asistencias.filter(val => val._id !== asistencia._id);
                     this.messageService.add({severity:'success', summary: 'Successful', detail: 'Asistencia Deleted', life: 3000});
                   });

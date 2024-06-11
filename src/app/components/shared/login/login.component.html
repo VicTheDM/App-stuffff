@@ -1,1 +1,39 @@
-<p>login works!</p>
+<form id="form" #form class="d-flex justify-content-center align-items-center flex-column p-3 h-100"
+  [ngClass]="{'complete': loadComplete, 'complete_user': userComplete, 'complete_pass': passComplete}"
+  [formGroup]="simpleForm" (ngSubmit)="onSubmit()">
+  <!-- <img class="branding_logo" width="200" [src]="logo ? logo : 'assets/img/logo_base.png'"
+    onerror="src='assets/img/logo_base.png'" alt="Logo"> -->
+  <div class="container-man">
+    <div class="man-icon">
+      <svg class="position-absolute man head"><circle cx="20" cy="20" r="20"></circle></svg>
+      <svg class="position-absolute man body"><circle cx="32" cy="32" r="32"></circle></svg>
+      <svg class="position-absolute man shirt"><circle cx="15" cy="15" r="15"></circle></svg>
+    </div>
+    <div class="bg"></div>
+  </div>
+  <div class="controls-container">
+    <input type="text" autocomplete="off" formControlName="username" #username id="username"
+      class="form-control border-transparent text-center t" placeholder="Usuario"
+      (keyup)="checkUser($event);">
+    <div class="mb-1 position-relative _pass">
+      <input type="{{showPass ? 'text' : 'password'}}" autocomplete="off"
+        formControlName="password" id="password" #password placeholder="Contraseña"
+        class="form-control border-transparent text-center t _pass"
+        *ngIf="userInput || userPassword" (keyup)="checkPass($event)">
+      <button class="btn btn-sm pass text-primary t _tab" type="button" placement="top"
+        ngbTooltip="{{ showPass ? 'Ocultar' : 'Mostrar'}} contraseña" tabindex="-1"
+        *ngIf="userInput || userPassword" (click)="showPassword()">
+        <i class="fas {{ showPass ? 'fa-eye-slash' : 'fa-eye'}}"></i>
+      </button>
+    </div>
+    <button class="btn btn-block d-flex justify-content-center align-items-center mt-1"
+      id="loginButton" #loginButton [ngClass]="{ 'btn-danger' : error, 'btn-primary' : !error}"
+      [disabled]="loading" *ngIf="userPassword && userInput">
+      <span *ngIf="!loading && !error">Aceptar</span>
+      <span class="show-in-error" *ngIf="error">Hubo un error. Volver a intentar</span>
+      <div class="spinner-border" role="status" *ngIf="loading">
+        <span class="sr-only">Cargando...</span>
+      </div>
+    </button>
+  </div>
+</form>

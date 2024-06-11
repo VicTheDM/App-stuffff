@@ -6,7 +6,7 @@ import {
   NgxScannerQrcodeComponent,
   ScannerQRCodeSelectedFiles,
 } from 'ngx-scanner-qrcode';
-import { PersonasService } from 'src/app/services/personas.service';
+import { EndpointsService } from 'src/app/services/endpoints.service';
 import moment from 'moment';
 import { MenuItem, MessageService } from 'primeng/api';
 
@@ -14,7 +14,7 @@ import { MenuItem, MessageService } from 'primeng/api';
   selector: 'app-checador',
   templateUrl: './checador.component.html',
   styleUrls: ['./checador.component.css'],
-  providers: [PersonasService]
+  providers: [EndpointsService]
 
 })
 
@@ -26,7 +26,7 @@ export class ChecadorComponent {
   personas: any[];
   asistencias: any[];
   constructor(
-    private personaService: PersonasService, 
+    private EndpointsService: EndpointsService, 
     private qrcode: NgxScannerQrcodeService,
     private messageService: MessageService, 
     ) {
@@ -43,13 +43,13 @@ export class ChecadorComponent {
           }
       ];
     this.qrCodeStr = '65232a5bf9b3ccdff7e424ed';
-    this.personaService.getAll(0).subscribe(data => {
+    this.EndpointsService.getAll(0).subscribe(data => {
       this.personas = data  
     }, error =>     
     this.messageService.add({severity:'error', summary: 'Participantes error', detail: 'Error, recargue pagina', life: 3000})    
     );
 
-    this.personaService.getAll(1).subscribe(data => {
+    this.EndpointsService.getAll(1).subscribe(data => {
       this.asistencias = data }, error =>     
       this.messageService.add({severity:'error', summary: 'Asistencias error', detail: 'Error, recargue pagina', life: 3000})    
       );
@@ -72,8 +72,8 @@ export class ChecadorComponent {
       this.messageService.add({severity:'error', summary: 'Falla', detail: 'Participante ya se registro hoy', life: 3000});      
     }else{
       this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante registro', life: 3000});
-      this.personaService.create(envio, 1).subscribe(res => {
-        this.personaService.getAll(1).subscribe(data => {
+      this.EndpointsService.create(envio, 1).subscribe(res => {
+        this.EndpointsService.getAll(1).subscribe(data => {
           	this.asistencias = data
         	}, error =>
           	this.messageService.add({severity:'error', summary: 'Participantes error', detail: 'Error al cargar asistencias', life: 3000})

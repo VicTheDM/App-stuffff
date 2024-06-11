@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://roundhouse.proxy.rlwy.net:24639"
+  // apiUrl: "mongodb+srv://admin:admin@mensajeria.psslkdx.mongodb.net/"
+  // apiUrl: "https://roundhouse.proxy.rlwy.net:24639"
+  apiUrl: 'http://localhost:3501',
+  keyCripto: '0mega4ft3r',
+  saltScret: '4llt4tGl0w515G07d',
 };
 
 /*

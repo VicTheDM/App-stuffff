@@ -1,0 +1,30 @@
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+      <img src="/assets/222.png" height="40" class="mr-2" />
+  </ng-template>
+  <ng-template pTemplate="end">
+    <button pButton pRipple label="Editar" icon="pi pi-pencil" class="p-button-success mr-2" (click)="updateDoc()" *ngIf="doc._id"></button>
+    <button pButton pRipple label="Agregar" icon="pi pi-plus" class="p-button-success mr-2" (click)="createDoc()" *ngIf="!doc._id"></button>
+  </ng-template>
+</p-menubar>
+<main class="container">
+    <form [formGroup]="this.simpleForm" >
+        Nombre de Usuario(s):
+        <input #userName formControlName="userName" class="form-control"   placeholder="userName"/>
+  
+        Nombre(s):
+        <input #nombre formControlName="nombre" class="form-control"   placeholder="Nombre.. "/>
+    
+        Correo:
+        <input #correo formControlName="correo"  class="form-control"  placeholder="abc@gmail.com"/>
+        Dependencia:
+        <input  #dependencia formControlName="dependencia"  class="form-control"  placeholder="Cultura"/>
+        
+        Contraseña:
+        <input  #contraseña formControlName="password"  class="form-control"  placeholder="******"/>
+       
+</form>
+</main>
+   
+<!-- Toast para el feedback de la acción -->
+<p-toast></p-toast>

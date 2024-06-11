@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Persona } from '../../../domain/personas';
-import { PersonasService } from '../../../services/personas.service';
+import { EndpointsService } from '../../../services/endpoints.service';
 import { MenuItem } from 'primeng/api';
 
 @Component({
     selector: 'app-eventos',
     templateUrl: './eventos.component.html',
     styleUrls: ['./eventos.component.css'],
-    providers: [ConfirmationService,MessageService, PersonasService]
+    providers: [ConfirmationService,MessageService, EndpointsService]
 })
 export class EventosComponent implements OnInit {
 
@@ -22,7 +22,7 @@ export class EventosComponent implements OnInit {
     statuses: any[];
 
     constructor(
-        private personaService: PersonasService, 
+        private EndpointsService: EndpointsService, 
         private messageService: MessageService, 
         private confirmationService: ConfirmationService
         ) 
@@ -45,7 +45,7 @@ export class EventosComponent implements OnInit {
                 routerLink:'/eventos'
             }
         ];
-        this.personaService.getAll(2).subscribe(data => {
+        this.EndpointsService.getAll(2).subscribe(data => {
             this.eventos = data
             this.fillTotal();
         });
@@ -82,7 +82,7 @@ export class EventosComponent implements OnInit {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 let id = evento._id!
-                this.personaService.delete(id,2).subscribe(eventos => {
+                this.EndpointsService.delete(id,2).subscribe(eventos => {
                     this.eventos = this.eventos.filter(val => val._id !== evento._id);
                     this.persona = {};
                     this.messageService.add({severity:'success', summary: 'Successful', detail: 'Evento Deleted', life: 3000});

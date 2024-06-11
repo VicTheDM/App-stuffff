@@ -17,6 +17,9 @@ import { PrimeIcons, MenuItem } from 'primeng/api';
 import { ButtonModule } from "primeng/button";
 LOAD_WASM().subscribe((res: any) => console.log('LOAD_WASM', res));
 import { MenubarModule } from 'primeng/menubar';
+import { UsuariosFormComponent } from './views/usuarios/usuarios-form/usuarios-form.component';
+import { CorreosComponent } from './views/correos/correos.component';
+import { CorreosFormComponent } from './views/correos/correos-form/correos-form.component';
 @NgModule({
   imports: [
     FeatherModule.pick(allIcons)
@@ -34,7 +37,8 @@ import { MenubarModule } from 'primeng/menubar';
     AppRoutingModule,
     FeatherModule,
   ],
-  providers: [MessageService, ConfirmationService]
+  providers: [MessageService, ConfirmationService],
+  declarations: [ ]
 
 })
 export class PrimeNgModule {}

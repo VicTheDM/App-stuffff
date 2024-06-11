@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Persona } from '../../../domain/personas';
-import { PersonasService } from '../../../services/personas.service';
+import { EndpointsService } from '../../../services/endpoints.service';
 import { MenuItem } from 'primeng/api';
 
 @Component({
     selector: 'app-participantes',
     templateUrl: './personas.component.html',
     styleUrls: ['./personas.component.scss'],
-    providers: [ConfirmationService,MessageService, PersonasService]
+    providers: [ConfirmationService,MessageService, EndpointsService]
 })
 export class PersonasComponent implements OnInit {
 
@@ -23,7 +23,7 @@ export class PersonasComponent implements OnInit {
     timmer          : any;
 
     constructor(
-        private personaService: PersonasService, 
+        private EndpointsService: EndpointsService, 
         private messageService: MessageService, 
         private confirmationService: ConfirmationService
         ) 
@@ -45,16 +45,17 @@ export class PersonasComponent implements OnInit {
         }
 
         async getStuff(){
-                await this.personaService.getAll(0).subscribe(data => {
-                    this.personas = data                    
+                await this.EndpointsService.getAll(0).subscribe((data:any) => {
+                    console.log(data.res)
+                    this.personas = data.res                    
                     setTimeout(()=>{
                         this.fillTotal();
                     },500)
                 });
-                await this.personaService.getAll(1).subscribe(data => {
+                await this.EndpointsService.getAll(1).subscribe(data => {
                     this.asistencias = data
                 });
-                await this.personaService.getAll(2).subscribe(data => {
+                await this.EndpointsService.getAll(2).subscribe(data => {
                     this.eventos = data
                 });       
         }
@@ -108,7 +109,7 @@ export class PersonasComponent implements OnInit {
             accept: () => {
                 for (let index = 0; index < this.selectedPersonas.length; index++) {
                     const id = this.selectedPersonas[index]._id;
-                    this.personaService.delete(id,0).subscribe(personas => {
+                    this.EndpointsService.delete(id,0).subscribe(personas => {
                         this.personas = this.personas.filter(val => val._id !== id);
                         this.messageService.add({severity:'success', summary: 'Successful', detail: 'Persona Deleted', life: 3000});
                       });
@@ -129,7 +130,7 @@ export class PersonasComponent implements OnInit {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 let id = persona._id!
-                this.personaService.delete(id,0).subscribe(personas => {
+                this.EndpointsService.delete(id,0).subscribe(personas => {
                     this.personas = this.personas.filter(val => val._id !== persona._id);
                     this.persona = {};
                     this.messageService.add({severity:'success', summary: 'Successful', detail: 'Persona Deleted', life: 3000});

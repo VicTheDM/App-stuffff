@@ -1,6 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { DocInit } from 'src/app/models/DocInit';
-import { PersonasService } from 'src/app/services/personas.service';
+import { EndpointsService } from 'src/app/services/endpoints.service';
 import { ActivatedRoute } from '@angular/router';
 import { PersonasInit } from 'src/app/models/PerconasInit';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -15,7 +15,7 @@ import { Location } from '@angular/common';
   selector: 'app-participantes-form',
   templateUrl: './personas-form.component.html',
   styleUrls: ['./personas-form.component.css'],
-  providers: [ConfirmationService,MessageService,PersonasService]
+  providers: [ConfirmationService,MessageService,EndpointsService]
 })
 export class PersonasFormComponent {
   @Input() doc={
@@ -37,7 +37,7 @@ export class PersonasFormComponent {
   public simpleForm     : FormGroup;
 
   constructor(
-    private personaService: PersonasService,
+    private EndpointsService: EndpointsService,
     private route: ActivatedRoute, 
     private location: Location,
     private messageService: MessageService, 
@@ -62,9 +62,9 @@ export class PersonasFormComponent {
     this.route.params.subscribe((params) => {
       this._id = params['_id'];
       if (this._id !== '0'){
-        this.personaService.getAll(0).subscribe(personas => {
-          this.personaService.getAll(1).subscribe(asistencias => {
-            this.personaService.getAll(2).subscribe(eventos => {
+        this.EndpointsService.getAll(0).subscribe(personas => {
+          this.EndpointsService.getAll(1).subscribe(asistencias => {
+            this.EndpointsService.getAll(2).subscribe(eventos => {
               this.eventos=eventos;
               this.personas = personas
               this.doc = personas.find(val => val._id == this._id)
@@ -114,7 +114,7 @@ export class PersonasFormComponent {
           });
         });
       }else{
-        this.personaService.getAll(2).subscribe(eventos => {
+        this.EndpointsService.getAll(2).subscribe(eventos => {
           this.eventos=eventos;
           this.doc ={
             _id: '',
@@ -195,7 +195,7 @@ changeDate(event:any, index:number){
   this.doc.fechas![index] = event
 }
   async createDoc() {
-    await this.personaService.create(this.simpleForm.value,0).subscribe(personas => {
+    await this.EndpointsService.create(this.simpleForm.value,0).subscribe(personas => {
       this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante registrado', life: 1000});
       setTimeout(() => {
         this.location.back();
@@ -203,7 +203,7 @@ changeDate(event:any, index:number){
     });
   }
   updateDoc() {    
-    this.personaService.update(this.simpleForm.value,0).subscribe(personas => {
+    this.EndpointsService.update(this.simpleForm.value,0).subscribe(personas => {
       this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante actualizado', life: 1000});
       setTimeout(() => {
         this.location.back();

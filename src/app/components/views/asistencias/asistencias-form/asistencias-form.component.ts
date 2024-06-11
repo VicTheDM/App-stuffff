@@ -1,6 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { DocInit } from 'src/app/models/DocInit';
-import { PersonasService } from 'src/app/services/personas.service';
+import { EndpointsService } from 'src/app/services/endpoints.service';
 import { ActivatedRoute } from '@angular/router';
 import { PersonasInit } from 'src/app/models/PerconasInit';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -15,7 +15,7 @@ import { Location } from '@angular/common';
   selector: 'app-asistencias-form',
   templateUrl: './asistencias-form.component.html',
   styleUrls: ['./asistencias-form.component.css'],
-  providers: [ConfirmationService,MessageService,PersonasService]
+  providers: [ConfirmationService,MessageService,EndpointsService]
 })
 export class AsistenciasFormComponent {
   @Input() doc={
@@ -35,7 +35,7 @@ export class AsistenciasFormComponent {
   asistencias: any[];
 
   constructor(
-    private personaService: PersonasService,
+    private EndpointsService: EndpointsService,
     private route: ActivatedRoute, 
     private location: Location,
     private messageService: MessageService, 
@@ -57,9 +57,9 @@ export class AsistenciasFormComponent {
     this.route.params.subscribe((params) => {
       this._id = params['_id'];
       if (this._id !== '0'){
-        this.personaService.getAll(1).subscribe(data => {
+        this.EndpointsService.getAll(1).subscribe(data => {
           this.asistencias= data;
-          this.personaService.getAll(2).subscribe(data2 => {
+          this.EndpointsService.getAll(2).subscribe(data2 => {
             this.eventos = data2
               this.doc = this.asistencias.find(val => val._id == this._id);              
               this.doc.evento = this.eventos.find(val => val._id == this.doc.eventoId).nombre
@@ -177,13 +177,13 @@ export class AsistenciasFormComponent {
       this.messageService.add({severity:'error', summary: 'Falla', detail: 'Participante ya se registro hoy', life: 3000});      
     }else{
       this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante registro', life: 3000});
-      // this.personaService.create(envio, 1).subscribe(res=>{
-      //   this.personaService.getAll(1).subscribe(data => {
+      // this.EndpointsService.create(envio, 1).subscribe(res=>{
+      //   this.EndpointsService.getAll(1).subscribe(data => {
       //     this.asistencias = data });
       // })
     }
     console.log("create: ", this.simpleForm.value)
-    // await this.personaService.create(this.simpleForm.value,2).subscribe(personas => {
+    // await this.EndpointsService.create(this.simpleForm.value,2).subscribe(personas => {
     //   this.messageService.add({severity:'success', summary: 'Successful', detail: 'Participante registrado', life: 1000});
     //   setTimeout(() => {
     //     this.location.back();

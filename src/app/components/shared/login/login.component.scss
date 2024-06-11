@@ -1,0 +1,198 @@
+:root {
+    --x: 50px;
+  }
+  .logo {
+    max-width: 100%;
+    width: 125px;
+  }
+  .btn-block,
+  .form-control {
+    margin: 0 auto;
+  }
+  .h-100 {
+    min-height: 100vh;
+  }
+  .br {
+    bottom: 1rem;
+    right: 1rem;
+  }
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+  .border-transparent:not(.is-invalid):not(:invalid) {
+    border-color: transparent;
+  }
+  .invalid-feedback {
+    text-align: center;
+  }
+  .spinner-border {
+    border-width: 0.15rem;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  .container-man {
+    position: relative;
+    transition: .5s linear 2s;
+    margin-bottom: -3rem;
+    z-index: 10;
+    .bg {
+      background: rgb(192, 192, 192, .5);
+      border-radius: 50%;
+      height: 125px;
+      left: 50%;
+      position: absolute;
+      top: 00%;
+      transform: translate(-50%, -75%) scale(0);
+      transition: 1s cubic-bezier(0.42, 0, 0, 5);
+      width: 125px;
+    }
+  }
+  circle {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #212121;
+    stroke-width: 5;
+    stroke-linecap: round;
+  }
+  select.t {
+    opacity: 0;
+    transition: opacity .5s ease-in-out 1s, background-color .25s ease-in-out;
+    &:hover,
+    &:focus {
+      background-color: var(--input) !important;
+    }
+  }
+  input.t {
+    opacity: 0;
+    transition: opacity .5s ease-in-out 1s, background-color .25s ease-in-out;
+    &:hover,
+    &:focus {
+      background-color: var(--input) !important;
+    }
+  }
+  .head {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    transform: translate3d(-50%, -154%, 0) rotate(180deg);
+    circle {
+      stroke-dasharray: 125px;
+      transform: translate(5px, 5px);
+      stroke-dashoffset: calc(125px - (125px * 0) / 100);
+      transition: .5s ease-in .25s;
+    }
+  }
+  .shirt {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    transform: translate3d(-40%, -94%, 0);
+    circle {
+      stroke-dasharray: 95px;
+      transform: translate(5px, 5px);
+      stroke-dashoffset: calc(95px - (95px * 0) / 100);
+      transition: .5s linear .25s;
+    }
+  }
+  .body {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    transform: translate3d(-50%, -50%, 0) rotate(180deg);
+    circle {
+      transform: translate(3px, 3px);
+      stroke-dasharray: 201px;
+      stroke-dashoffset: calc(201px - (201px * 0) / 100);
+      transition: .5s linear .25s;
+    }
+  }
+  .man {
+    position: relative;
+    top: 50%;
+    left: 50%;
+  }
+  .man-icon {
+    transform: translateY(25%);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .ng-submitted {
+    .btn-primary {
+      transform: translate3d(0, calc(-100% - 4px), 0);
+      transition: .25s;
+      opacity: 1 !important;
+    }
+  }
+  .complete {
+    .branding_logo {
+      opacity: 1;
+    }
+    &.complete_user {
+      .bg {
+        background-color: rgb(63, 81, 181, .26);
+      }
+    }
+    &.complete_pass {
+      .bg {
+        background-color: rgb(0, 128, 0, .31);
+      }
+    }
+    .container-man {
+      transition: .5s linear 0s;
+      margin-bottom: 3rem;
+    }
+    .bg {
+      transform: translate(-50%, -75%) scale(1);
+    }
+    .head {
+      circle {
+        stroke-dashoffset: calc(125px - (125px * 100) / 100);
+      }
+    }
+    .shirt {
+      circle {
+        stroke-dashoffset: calc(95px - (95px * 50) / 100);
+      }
+    }
+    .body {
+      circle {
+        stroke-dashoffset: calc(201px - (201px * 50) / 100);
+      }
+    }
+    select,
+    input {
+      opacity: 1;
+    }
+  }
+  .branding_logo {
+    transform: translate3d(0, -115px, 0);
+    opacity: 0;
+    transition: .5s ease-in-out 1s;
+  }
+  .login_error {
+    display: none;
+  }
+  .btn-danger {
+    background-color: #e11969;
+    .spinner-border {
+      display: none !important;
+    }
+    .login_error {
+      display: block;
+    }
+  }
+  .pass {
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  
+  .show-in-error {
+    white-space: nowrap;
+  }

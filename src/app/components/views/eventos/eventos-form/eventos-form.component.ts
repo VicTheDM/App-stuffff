@@ -1,6 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { DocInit } from 'src/app/models/DocInit';
-import { PersonasService } from 'src/app/services/personas.service';
+import { EndpointsService } from 'src/app/services/endpoints.service';
 import { ActivatedRoute } from '@angular/router';
 import { PersonasInit } from 'src/app/models/PerconasInit';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -15,7 +15,7 @@ import { Location } from '@angular/common';
   selector: 'app-eventos-form',
   templateUrl: './eventos-form.component.html',
   styleUrls: ['./eventos-form.component.css'],
-  providers: [ConfirmationService,MessageService,PersonasService]
+  providers: [ConfirmationService,MessageService,EndpointsService]
 })
 export class EventosFormComponent {
   @Input() doc={
@@ -31,7 +31,7 @@ export class EventosFormComponent {
   public simpleForm     : FormGroup;
 
   constructor(
-    private personaService: PersonasService,
+    private EndpointsService: EndpointsService,
     private route: ActivatedRoute, 
     private location: Location,
     private messageService: MessageService, 
@@ -56,7 +56,7 @@ export class EventosFormComponent {
     this.route.params.subscribe((params) => {
       this._id = params['_id'];
       if (this._id !== '0'){
-            this.personaService.getAll(2).subscribe(eventos => {
+            this.EndpointsService.getAll(2).subscribe(eventos => {
               this.eventos=eventos;
               this.doc = eventos.find(val => val._id == this._id)
               this.simpleForm.patchValue({
@@ -84,7 +84,7 @@ export class EventosFormComponent {
             ];
             });
       }else{
-        this.personaService.getAll(2).subscribe(eventos => {
+        this.EndpointsService.getAll(2).subscribe(eventos => {
           this.eventos=eventos;
           this.doc ={
             _id: '',
@@ -144,7 +144,7 @@ export class EventosFormComponent {
 }
 
   async createDoc() {
-    await this.personaService.create(this.simpleForm.value,2).subscribe(personas => {
+    await this.EndpointsService.create(this.simpleForm.value,2).subscribe(personas => {
       this.messageService.add({severity:'success', summary: 'Successful', detail: 'Evento registrado', life: 1000});
       setTimeout(() => {
         this.location.back();
@@ -152,7 +152,7 @@ export class EventosFormComponent {
     });
   }
   updateDoc() {    
-    this.personaService.update(this.simpleForm.value,2).subscribe(personas => {
+    this.EndpointsService.update(this.simpleForm.value,2).subscribe(personas => {
       this.messageService.add({severity:'success', summary: 'Successful', detail: 'Evento actualizado', life: 1000});
       setTimeout(() => {
         this.location.back();

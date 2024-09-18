@@ -1,7 +1,7 @@
 <div class="d-print-block">
     <div *ngIf="this.selectedPersonas.length >= 1">
                 <div class="grid" style="display: grid;  grid-template-columns: auto auto auto auto;">
-                    <ng-container *ngFor="let row of selectedPersonas">
+                    <ng-container *ngFor="let i of selectedPersonas">
                         <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
                         <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
                     </ng-container>
@@ -9,7 +9,7 @@
     </div>
     <div *ngIf="this.selectedPersonas.length == 0">
         <div class="grid" style="display: grid;  grid-template-columns: auto auto auto auto;">
-            <ng-container *ngFor="let row of personas">
+            <ng-container *ngFor="let i of personas">
                 <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
                 <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
             </ng-container>

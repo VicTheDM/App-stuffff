@@ -1,24 +1,23 @@
 <div class="d-print-block">
-    <div class="row">
-        <div class="column">
             <div class="grid-container">
                 <div *ngIf="this.selectedPersonas.length >= 1">
-                    <div *ngFor="let i of this.selectedPersonas; let index = index">
-                        <div class="card grid-item">
-                            <div class="img-bx">
-                                <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                            </div>
-                            <div class="content">
-                                <div class="detail">
-                                    <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
-                                </div>
+                    
+                <div class="grid">
+                    <ng-container *ngFor="let row of this.selectedPersonas">                        
+                        <div class="img-bx">
+                            <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                        </div>
+                        <div class="content">
+                            <div class="detail">
+                                <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
                             </div>
                         </div>
-                    </div>
+                    </ng-container>     
+                </div>
                 </div>
                 <div *ngIf="this.selectedPersonas.length == 0">
-                    <div *ngFor="let i of personas; let index = index">
-                        <div class="card  grid-item">
+                    <div class="grid">
+                        <ng-container *ngFor="let row of personas">                        
                             <div class="img-bx">
                                 <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
                             </div>
@@ -27,13 +26,11 @@
                                     <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
                                 </div>
                             </div>
-                        </div>
+                        </ng-container>     
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 <div class=" d-print-none">
     <p-menubar [model]="items">
         <ng-template pTemplate="start">

@@ -1,20 +1,21 @@
 <div class="d-print-block">
     <div *ngIf="this.selectedPersonas.length >= 1">
-                <div class="grid" style="display: grid;
+        <div class="grid" style="display: grid;
                 justify-items: center;
                 text-align: center;
                 grid-template-columns: auto auto auto auto;">
-                    <ng-container *ngFor="let i of selectedPersonas">
-                        <div style="
+            <ng-container *ngFor="let i of selectedPersonas">
+                <div style="
                         border-radius: 5px;
                         border-color: black;
                         border-style: solid;
                         background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%);">
-                            <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                            <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
-                        </div>
-                    </ng-container>
+                    <h2>{{i.nombre}}</h2>
+                    <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                    <h2><bold>{{i.dependencia}}</bold></h2>
                 </div>
+            </ng-container>
+        </div>
     </div>
     <div *ngIf="this.selectedPersonas.length == 0">
         <div class="grid" style="display: grid;
@@ -27,8 +28,9 @@
                 border-color: black;
                 border-style: solid;
                 background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%);">
+                    <h2>{{i.nombre}}</h2>
                     <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                    <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
+                    <h2><bold>{{i.dependencia}}</bold></h2>
                 </div>
             </ng-container>
         </div>

@@ -44,20 +44,32 @@
                     <div *ngIf="this.selectedPersonas.length >= 1">
                         <tr *ngFor="let i of this.selectedPersonas; let index = index" style="page-break-inside: avoid;">
                             <td style="page-break-inside: avoid"  *ngIf="0 !== index % 2">
-                                <h1 style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
-                                    {{i.nombre}}
+                                <div class="card" style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
+                                    <div class="img-bx">
                                     <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                                </h1>
+                                    </div>
+                                    <div class="content">
+                                    <div class="detail">
+                                        <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
+                                    </div>
+                                    </div>
+                                </div>
                             </td>            
                         </tr>
                     </div>
                     <div  *ngIf="this.selectedPersonas.length == 0">
                         <tr *ngFor="let i of personas; let index = index" style="page-break-inside: avoid;">
                             <td style="page-break-inside: avoid"  *ngIf="0 !== index % 2">
-                                <h1 style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
-                                    {{i.nombre}}
+                                <div class="card" style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
+                                    <div class="img-bx">
                                     <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                                </h1>
+                                    </div>
+                                    <div class="content">
+                                    <div class="detail">
+                                        <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
+                                    </div>
+                                    </div>
+                                </div>
                             </td>            
                         </tr>
                     </div>

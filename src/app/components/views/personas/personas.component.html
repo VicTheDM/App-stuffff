@@ -4,7 +4,7 @@
                     <ng-container *ngFor="let i of selectedPersonas">
                         <div>
                             <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                            <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
+                            <h2 style="align-items: center;">{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
                         </div>
                     </ng-container>
                 </div>
@@ -14,7 +14,7 @@
             <ng-container *ngFor="let i of personas">
                 <div>
                     <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                    <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
+                    <h2 style="align-items: center;">{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
                 </div>
             </ng-container>
         </div>

@@ -97,5 +97,5 @@
   }
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Create 2 columns and auto-place rows */
+    grid-template-columns: auto auto auto auto; /* Create 2 columns and auto-place rows */
 }

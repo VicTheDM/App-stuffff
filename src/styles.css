@@ -1,24 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-  .card {
-    
-      font-family: 'Times New Roman', Times, serif;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(#03a9f4, #03a9f4 45%, #fff 45%, #fff 100%);
-    position: relative;
-    width: 300px;
-    height: 400px;
-    border-radius: 10px;
-    border-color: black;
-    border: #444;
-    border-right: #03a9f4;
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
-  }
-  
-  .img-bx {
+
+
+.img-bx {
     position: absolute;
     top: 0;
     left: 0;
@@ -97,4 +81,21 @@
     background: #03a9f4;
     color: #fff;
   }
-  
+  .grid-container {
+      display: inline-grid;
+      grid-template-columns: auto auto auto;
+      background-color: #2196F3;
+      padding: 10px;
+    }
+    
+    .grid-item {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      font-size: 30px;
+      text-align: center;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: auto auto auto auto; /* Create 2 columns and auto-place rows */
+  }

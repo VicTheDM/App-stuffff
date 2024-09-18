@@ -4,174 +4,145 @@
             <table class="table" aria-label="tabla-impresion">
                 <tbody style="page-break-inside: avoid;">
                     <div *ngIf="this.selectedPersonas.length >= 1">
-                        <tr *ngFor="let i of this.selectedPersonas; let index = index" style="page-break-inside: avoid;">
-                            <td style="page-break-inside: avoid"  *ngIf="0 === index % 2">
-                                <div class="card" style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
-                                    <div class="img-bx">
+                        <div *ngFor="let i of this.selectedPersonas; let index = index"
+                            style="page-break-inside: avoid;">
+                            <div class="card"
+                                style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
+                                <div class="img-bx">
                                     <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                                    </div>
-                                    <div class="content">
+                                </div>
+                                <div class="content">
                                     <div class="detail">
                                         <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
                                     </div>
-                                    </div>
                                 </div>
-                            </td>            
-                        </tr>
+                            </div>
+                        </div>
                     </div>
-                    <div  *ngIf="this.selectedPersonas.length == 0">
-                        <tr *ngFor="let i of personas; let index = index" style="page-break-inside: avoid;">
-                            <td style="page-break-inside: avoid"  *ngIf="0 === index % 2">
-                                <div class="card" style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
-                                    <div class="img-bx">
+                    <div *ngIf="this.selectedPersonas.length == 0">
+                        <div *ngFor="let i of personas; let index = index" style="page-break-inside: avoid;">
+                            <div class="card"
+                                style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
+                                <div class="img-bx">
                                     <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                                    </div>
-                                    <div class="content">
+                                </div>
+                                <div class="content">
                                     <div class="detail">
                                         <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
                                     </div>
-                                    </div>
                                 </div>
-                            </td>            
-                        </tr>
+                            </div>
+                        </div>
                     </div>
                 </tbody>
             </table>
         </div>
-        <div class="column">
-            <table class="table" aria-label="tabla-impresion">
-                <tbody style="page-break-inside: avoid;">
-                    <div *ngIf="this.selectedPersonas.length >= 1">
-                        <tr *ngFor="let i of this.selectedPersonas; let index = index" style="page-break-inside: avoid;">
-                            <td style="page-break-inside: avoid"  *ngIf="0 !== index % 2">
-                                <div class="card" style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
-                                    <div class="img-bx">
-                                    <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                                    </div>
-                                    <div class="content">
-                                    <div class="detail">
-                                        <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
-                                    </div>
-                                    </div>
-                                </div>
-                            </td>            
-                        </tr>
-                    </div>
-                    <div  *ngIf="this.selectedPersonas.length == 0">
-                        <tr *ngFor="let i of personas; let index = index" style="page-break-inside: avoid;">
-                            <td style="page-break-inside: avoid"  *ngIf="0 !== index % 2">
-                                <div class="card" style="max-width: 300px;text-align: center; margin-top: 10px; page-break-inside: avoid;">
-                                    <div class="img-bx">
-                                    <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                                    </div>
-                                    <div class="content">
-                                    <div class="detail">
-                                        <h2>{{i.nombre}}<br /><span>{{i.dependencia}}</span></h2>
-                                    </div>
-                                    </div>
-                                </div>
-                            </td>            
-                        </tr>
-                    </div>
-                </tbody>
-              </table>
-        </div>
-      </div>
-    
+    </div>
+
 </div>
-<div class=" d-print-none"> 
-<p-menubar [model]="items">
-    <ng-template pTemplate="start">
-        <img src="/assets/222.png" height="40" class="mr-2" />
-    </ng-template>
-    <ng-template pTemplate="end">
-        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value!, 'contains')" placeholder="Buscar..." />
-        <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="goTo('0')"></button>
-        <button pButton pRipple label="Imprimir" icon="pi pi-plus" class="p-button-success mr-2" (click)="Print()"></button>
-        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel(0)" class="p-button-success mx-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
-    </ng-template>
-</p-menubar>
-<p-table #dt [value]="personas" [rows]="10" [paginator]="true" [globalFilterFields]="['nombre','dependencia', 'evento','status']"
-    [(selection)]="selectedPersonas" [rowHover]="true" dataKey="_id"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-    
-    <ng-template pTemplate="caption">
-        <ng-template [ngIf]="selectedPersonas.length > 0">
-          <div class="dcs">
-            <div class="left">
-              <span class="btn btn-light btn-sm me-1">{{ selectedPersonas.length }}</span>
-              <span> elemento{{ selectedPersonas.length > 1 ? 's' : '' }}</span>
-              <span> seleccionado{{ selectedPersonas.length > 1 ? 's' : '' }}</span>
-            </div>
-            <div class="right dcc">
-              <button type="button" class="btn btn-light mx-1" data-toggle="tooltip" data-placement="bottom" title="Eliminar"
-                (click)="deleteselectedPersonas()">
-                <i-feather name="trash"></i-feather>
-              </button>
-              <button type="button" class="btn btn-light mx-1" data-toggle="tooltip" data-placement="bottom" title="Cancelar"
-                (click)="removeSelection()">
-                <i-feather name="x"></i-feather>
-              </button>
-            </div>
-          </div>
+<div class=" d-print-none">
+    <p-menubar [model]="items">
+        <ng-template pTemplate="start">
+            <img src="/assets/222.png" height="40" class="mr-2" />
         </ng-template>
-      </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th style="width: 3rem">
-                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th>
-            <!-- <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th> -->
-            <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
-            <th pSortableColumn="correo">Correo <p-sortIcon field="correo"></p-sortIcon></th>
-            <th pSortableColumn="dependencia">Dependencia <p-sortIcon field="dependencia"></p-sortIcon></th>
-            <th pSortableColumn="evento">Evento <p-sortIcon field="evento"></p-sortIcon></th>
-            <th pSortableColumn="asistencias">Asistencias <p-sortIcon field="asistenciasn"></p-sortIcon></th>
-            <th pSortableColumn="asistencias">Fechas <p-sortIcon field="asistencias"></p-sortIcon></th>
-            <th pSortableColumn="status">Estatus <p-sortIcon field="status"></p-sortIcon></th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-persona>
-        <tr>
-            <td>
-                <p-tableCheckbox [value]="persona"></p-tableCheckbox>
-            </td>
-            <!-- <td>{{persona._id}}</td> -->
-            <td clic>{{persona.nombre}}</td>
-            <td>{{persona.correo}}</td>
-            <td>{{persona.dependencia}}</td>
-            <td>{{persona.evento}}</td>
-            <td>{{persona.asistencias}} / {{persona.asistencias_requeridas}}  </td>
-            <td >
-                <div *ngIf="persona.fechas">
-                    <div>
-                        {{(persona.fechas[0] | date)??''}}
+        <ng-template pTemplate="end">
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value!, 'contains')"
+                placeholder="Buscar..." />
+            <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2"
+                (click)="goTo('0')"></button>
+            <button pButton pRipple label="Imprimir" icon="pi pi-plus" class="p-button-success mr-2"
+                (click)="Print()"></button>
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel(0)"
+                class="p-button-success mx-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+        </ng-template>
+    </p-menubar>
+    <p-table #dt [value]="personas" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['nombre','dependencia', 'evento','status']" [(selection)]="selectedPersonas"
+        [rowHover]="true" dataKey="_id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
+
+        <ng-template pTemplate="caption">
+            <ng-template [ngIf]="selectedPersonas.length > 0">
+                <div class="dcs">
+                    <div class="left">
+                        <span class="btn btn-light btn-sm me-1">{{ selectedPersonas.length }}</span>
+                        <span> elemento{{ selectedPersonas.length > 1 ? 's' : '' }}</span>
+                        <span> seleccionado{{ selectedPersonas.length > 1 ? 's' : '' }}</span>
                     </div>
-                    <div>
-                        {{(persona.fechas[1] | date)??''}}
+                    <div class="right dcc">
+                        <button type="button" class="btn btn-light mx-1" data-toggle="tooltip" data-placement="bottom"
+                            title="Eliminar" (click)="deleteselectedPersonas()">
+                            <i-feather name="trash"></i-feather>
+                        </button>
+                        <button type="button" class="btn btn-light mx-1" data-toggle="tooltip" data-placement="bottom"
+                            title="Cancelar" (click)="removeSelection()">
+                            <i-feather name="x"></i-feather>
+                        </button>
                     </div>
-                    <div>
-                        {{(persona.fechas[2] | date)??''}}
-                    </div>
-                    <div *ngIf="persona.fechas.length>3" >...</div>
                 </div>
-            </td>
-                
-            <td  class="position-relative w-0 p-0">
-                <span *ngIf="persona.status === 0" class="badge bg-danger">INACTIVO</span>
-                <span *ngIf="persona.asistencias < persona.asistencias_requeridas" class="badge bg-success">Incompleto</span>
-                <span *ngIf="persona.asistencias == persona.asistencias_requeridas" class="badge bg-success">Completo</span>
-                <span *ngIf="persona.status === 3" class="badge bg-success">Falta</span>
-                <ng-template> 
-                    
-                </ng-template><div class="position-absolute actions">
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"  routerLink='/participantes-form/{{persona._id}}'></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"  (click)="deletePersona(persona)"></button>
-                </div>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+            </ng-template>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <!-- <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th> -->
+                <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+                <th pSortableColumn="correo">Correo <p-sortIcon field="correo"></p-sortIcon></th>
+                <th pSortableColumn="dependencia">Dependencia <p-sortIcon field="dependencia"></p-sortIcon></th>
+                <th pSortableColumn="evento">Evento <p-sortIcon field="evento"></p-sortIcon></th>
+                <th pSortableColumn="asistencias">Asistencias <p-sortIcon field="asistenciasn"></p-sortIcon></th>
+                <th pSortableColumn="asistencias">Fechas <p-sortIcon field="asistencias"></p-sortIcon></th>
+                <th pSortableColumn="status">Estatus <p-sortIcon field="status"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-persona>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="persona"></p-tableCheckbox>
+                </td>
+                <!-- <td>{{persona._id}}</td> -->
+                <td clic>{{persona.nombre}}</td>
+                <td>{{persona.correo}}</td>
+                <td>{{persona.dependencia}}</td>
+                <td>{{persona.evento}}</td>
+                <td>{{persona.asistencias}} / {{persona.asistencias_requeridas}} </td>
+                <td>
+                    <div *ngIf="persona.fechas">
+                        <div>
+                            {{(persona.fechas[0] | date)??''}}
+                        </div>
+                        <div>
+                            {{(persona.fechas[1] | date)??''}}
+                        </div>
+                        <div>
+                            {{(persona.fechas[2] | date)??''}}
+                        </div>
+                        <div *ngIf="persona.fechas.length>3">...</div>
+                    </div>
+                </td>
+
+                <td class="position-relative w-0 p-0">
+                    <span *ngIf="persona.status === 0" class="badge bg-danger">INACTIVO</span>
+                    <span *ngIf="persona.asistencias < persona.asistencias_requeridas"
+                        class="badge bg-success">Incompleto</span>
+                    <span *ngIf="persona.asistencias == persona.asistencias_requeridas"
+                        class="badge bg-success">Completo</span>
+                    <span *ngIf="persona.status === 3" class="badge bg-success">Falta</span>
+                    <ng-template>
+
+                    </ng-template>
+                    <div class="position-absolute actions">
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+                            routerLink='/participantes-form/{{persona._id}}'></button>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                            (click)="deletePersona(persona)"></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>
 
 

@@ -3,7 +3,7 @@
                 <div *ngIf="this.selectedPersonas.length >= 1">
                     
                 <div class="grid">
-                    <ng-container *ngFor="let row of this.selectedPersonas">                        
+                    <ng-container *ngFor="let i of this.selectedPersonas">                        
                         <div class="img-bx">
                             <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
                         </div>
@@ -17,7 +17,7 @@
                 </div>
                 <div *ngIf="this.selectedPersonas.length == 0">
                     <div class="grid">
-                        <ng-container *ngFor="let row of personas">                        
+                        <ng-container *ngFor="let i of personas">                        
                             <div class="img-bx">
                                 <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
                             </div>

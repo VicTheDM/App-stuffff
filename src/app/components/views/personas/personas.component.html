@@ -19,14 +19,17 @@
         </div>
     </div>
     <div *ngIf="this.selectedPersonas.length == 0">
-        <div class="grid">
-            <ng-container *ngFor="let i of personas">
-                <card class="card" style="border-radius: 5px; border: 1px solid black; background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%);">
-                    <h2>{{i.nombre}}</h2>
-                    <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                    <h2><strong>{{i.dependencia}}</strong></h2>
-                </card>
-            </ng-container>
+        <div class="grid" style="
+                                display: grid; 
+                                grid-template-columns: repeat(4, 1fr); 
+                                gap: 10px; ">
+            <card  *ngFor="let i of personas" class="card" style="border-radius: 5px; border: 1px solid black; background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%);break-inside: avoid; /* Prevent breaking cards inside a page */
+                                                                page-break-inside: avoid; /* Prevent breaking cards inside a page */
+                                                                margin-bottom: 10px; /* Add some margin for spacing */">
+                <h3>{{i.nombre}}</h3>
+                <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                <h3><strong>{{i.dependencia}}</strong></h3>
+            </card>
         </div>
     </div>
 </div>

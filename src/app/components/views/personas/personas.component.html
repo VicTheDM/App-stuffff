@@ -21,60 +21,48 @@
                     </div>
                     <div  *ngIf="this.selectedPersonas.length == 0">
                         <tr *ngFor="let i of personas; let index = index" style="page-break-inside: avoid;">
-                            <td style="page-break-inside: avoid"  *ngIf="0 === index % 2">                                
-                                <div style="
-                                break-inside: avoid;
-                                border-radius: 5px;
-                                border-color: black;
-                                border-style: solid;
-                                background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%);">
-                                    <h2>{{personas[index].nombre}}</h2>
-                                    <qrcode [(qrdata)]="personas[index]._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                                    <h2><bold>{{personas[index].dependencia}}</bold></h2>
-                                </div>
-                            </td>            
+                            <div *ngIf=" 0 === (index+2) % 3">
+                                <td style="page-break-inside: avoid"  *ngIf="0 !== index % 2 && 0 !== index % 3">   
+                                    <div style="
+                                    break-inside: avoid;
+                                    border-radius: 5px;
+                                    border-color: black;
+                                    border-style: solid;
+                                    background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%);">
+                                        <h2>{{personas[index].nombre}}</h2>
+                                        <qrcode [(qrdata)]="personas[index]._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                                        <h2><bold>{{personas[index].dependencia}}</bold></h2>
+                                    </div>
+                                </td>
+                                <td style="page-break-inside: avoid"  *ngIf="0 === index % 2">                                
+                                    <div style="
+                                    break-inside: avoid;
+                                    border-radius: 5px;
+                                    border-color: black;
+                                    border-style: solid;
+                                    background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%);">
+                                        <h2>{{personas[index+1].nombre}}</h2>
+                                        <qrcode [(qrdata)]="personas[index+1]._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                                        <h2><bold>{{personas[index+1].dependencia}}</bold></h2>
+                                    </div>
+                                </td>
+                                <td style="page-break-inside: avoid"  *ngIf="0 === index % 3">                                
+                                    <div style="
+                                    break-inside: avoid;
+                                    border-radius: 5px;
+                                    border-color: black;
+                                    border-style: solid;
+                                    background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%);">
+                                        <h2>{{personas[index+2].nombre}}</h2>
+                                        <qrcode [(qrdata)]="personas[index+2]._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                                        <h2><bold>{{personas[index+2].dependencia}}</bold></h2>
+                                    </div>
+                                </td>                
+                            </div>                             
                         </tr>
                     </div>
                 </tbody>
             </table>
-        </div>
-        <div class="column">
-            <table class="table" aria-label="tabla-impresion">
-                <tbody style="page-break-inside: avoid;">
-                    <div *ngIf="this.selectedPersonas.length >= 1">
-                        <tr *ngFor="let i of this.selectedPersonas; let index = index" style="page-break-inside: avoid;">
-                            <td style="page-break-inside: avoid"  *ngIf="0 !== index % 2">                                
-                                <div style="
-                                break-inside: avoid;
-                                border-radius: 5px;
-                                border-color: black;
-                                border-style: solid;
-                                background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%);">
-                                    <h2>{{personas[index].nombre}}</h2>
-                                    <qrcode [(qrdata)]="personas[index]._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                                    <h2><bold>{{personas[index].dependencia}}</bold></h2>
-                                </div>
-                            </td>            
-                        </tr>
-                    </div>
-                    <div  *ngIf="this.selectedPersonas.length == 0">
-                        <tr *ngFor="let i of personas; let index = index" style="page-break-inside: avoid;">
-                            <td style="page-break-inside: avoid"  *ngIf="0 !== index % 2">                                
-                                <div style="
-                                break-inside: avoid;
-                                border-radius: 5px;
-                                border-color: black;
-                                border-style: solid;
-                                background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%);">
-                                    <h2>{{personas[index].nombre}}</h2>
-                                    <qrcode [(qrdata)]="personas[index]._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-                                    <h2><bold>{{personas[index].dependencia}}</bold></h2>
-                                </div>
-                            </td>            
-                        </tr>
-                    </div>
-                </tbody>
-              </table>
         </div>
       </div>
 </div>

@@ -19,7 +19,28 @@
         </div>
     </div>
     <div *ngIf="this.selectedPersonas.length == 0">
-        <div class="grid" style="display: grid;
+        <table>
+            <tr *ngFor="let i of selectedPersonas; i as index">
+                <div *ngIf="(i+2)%3 ==0">
+                    <td>                        
+                        <h2>{{i.nombre}}</h2>
+                        <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                        <h2><bold>{{i.dependencia}}</bold></h2>
+                    </td>
+                    <td>                        
+                        <h2>{{(i+1).nombre}}</h2>
+                        <qrcode [(qrdata)]="(i+1)._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                        <h2><bold>{{(i+1).dependencia}}</bold></h2>
+                    </td>
+                    <td>                        
+                        <h2>{{(i+2).nombre}}</h2>
+                        <qrcode [(qrdata)]="(i+2)._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+                        <h2><bold>{{(i+2).dependencia}}</bold></h2>
+                    </td>
+                </div>
+            </tr>
+        </table>
+        <!-- <div class="grid" style="display: grid;
         justify-items: center;
         text-align: center;
         grid-template-columns: auto auto auto auto;">
@@ -35,7 +56,7 @@
                     <h2><bold>{{i.dependencia}}</bold></h2>
                 </div>
             </ng-container>
-        </div>
+        </div> -->
     </div>
 </div>
 <div class=" d-print-none">

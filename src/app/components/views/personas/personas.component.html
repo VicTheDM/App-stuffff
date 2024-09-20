@@ -19,17 +19,9 @@
         </div>
     </div>
     <div *ngIf="this.selectedPersonas.length == 0">
-        <div class="grid" style="display: grid; 
-        justify-items: center; 
-        text-align: center; 
-        grid-template-columns: repeat(4, 1fr); 
-        gap: 10px; /* Adjust as needed for spacing */">
+        <div class="grid">
             <ng-container *ngFor="let i of personas">
-                <card class="zzzzz" style="
-                    border-radius: 5px; 
-                    border: 1px solid black; 
-                    background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%); 
-                    overflow: hidden; /* Prevents breaking */">
+                <card class="card" style="border-radius: 5px; border: 1px solid black; background: linear-gradient(#03a9f4, #fff 45%, #03a9f4 45%, #fff 100%);">
                     <h2>{{i.nombre}}</h2>
                     <qrcode [(qrdata)]="i._id" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
                     <h2><strong>{{i.dependencia}}</strong></h2>

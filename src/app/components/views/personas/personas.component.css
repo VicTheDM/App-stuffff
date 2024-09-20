@@ -81,13 +81,27 @@
   background: #03a9f4;
   color: #fff;
 }
-  .grid {
-    display: grid;
-    grid-template-columns: auto auto auto auto; /* Create 2 columns and auto-place rows */
+.grid {
+  display: grid; 
+  justify-items: center; 
+  text-align: center; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 10px; /* Adjust as needed for spacing */
+}
+
+.card {
+  overflow: hidden; /* Prevents breaking */
 }
 @media print {
-    .zzzzz{
-      break-inside: avoid;
-      page-break-inside: avoid;
-    }
+  .grid {
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px; 
+}
+
+.card {
+    break-inside: avoid; /* Prevent breaking cards inside a page */
+    page-break-inside: avoid; /* Prevent breaking cards inside a page */
+    margin-bottom: 10px; /* Add some margin for spacing */
+}
   }

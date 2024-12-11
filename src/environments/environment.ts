@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://roundhouse.proxy.rlwy.net:24639"
+  apiUrl: "https://checadorapi-production.up.railway.app"
 };
 
 /*
